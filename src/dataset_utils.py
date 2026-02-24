@@ -47,12 +47,19 @@ def load_npz_samples(records: Sequence[SampleRecord], data_dir: str | Path) -> T
     data_dir = Path(data_dir)
     xs, ys = [], []
     for r in records:
-        p = Path(r.path)
-        if not p.is_absolute():
-            p = data_dir / p
-        if not p.exists():
+        base_path = Path(r.path)
+        candidates = [base_path]
+        if not base_path.is_absolute():
+            candidates.append(data_dir / base_path)
+            # Compatibilidad con manifests antiguos que guardaban "data/raw/..."
+            if base_path.parts and base_path.parts[0] == data_dir.name:
+                candidates.append(Path(*base_path.parts[1:]))
+
+        sample_path = next((c for c in candidates if c.exists()), None)
+        if sample_path is None:
             continue
-        with np.load(p, allow_pickle=False) as npz:
+
+        with np.load(sample_path, allow_pickle=False) as npz:
             xs.append(npz["X"].astype(np.float32))
             ys.append(int(npz["y"]))
     if not xs:

@@ -13,7 +13,7 @@ Proyecto completo en Python para capturar dataset propio, entrenar un modelo TCN
 - `src/export_tflite.py`: export a SavedModel + TFLite.
 - `src/infer_live.py`: inferencia en vivo Keras o TFLite.
 - `data/gestures.yaml`: mapeo editable `id_to_name` y `name_to_id`.
-- `data/manifest.jsonl`: registro de muestras guardadas.
+- `data/manifest.jsonl`: registro de muestras guardadas (paths relativos a `data/`).
 
 ## 1) Instalar dependencias
 
@@ -38,6 +38,19 @@ python src/capture_dataset.py --data_dir data --window_seconds 1.5 --target_fps 
 - `r`: repetir (reinicia estado sin guardar).
 - `s`: imprime contadores de sesión por gesto.
 - `x` o `ESC`: salir.
+
+
+
+### Estructura de almacenamiento (mejorada)
+
+Ahora cada muestra se guarda en su carpeta de clase:
+
+- `data/raw/00_gesture_01/`
+- `data/raw/01_gesture_02/`
+- ...
+- `data/raw/20_NONE/`
+
+Así el dataset queda ordenado por gesto desde el inicio, y el `manifest.jsonl` guarda rutas relativas para mayor portabilidad.
 
 ### Formato guardado por muestra (`.npz`)
 

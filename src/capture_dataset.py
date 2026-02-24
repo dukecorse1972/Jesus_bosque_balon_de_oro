@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import string
 import time
 from collections import Counter, deque
@@ -48,6 +49,12 @@ def default_keymap(names: List[str]) -> Dict[str, int]:
     return mapping
 
 
+def safe_class_dirname(y_id: int, y_name: str) -> str:
+    clean = re.sub(r"[^a-zA-Z0-9_-]+", "_", y_name.strip())
+    clean = re.sub(r"_+", "_", clean).strip("_") or "class"
+    return f"{y_id:02d}_{clean}"
+
+
 def draw_overlay(frame: np.ndarray, lines: List[str]) -> None:
     y = 24
     for line in lines:
@@ -61,12 +68,14 @@ def save_sample(
     y_name: str,
     out_dir: Path,
     manifest_path: Path,
+    data_dir: Path,
     meta: dict,
 ) -> Path:
-    out_dir.mkdir(parents=True, exist_ok=True)
+    class_dir = out_dir / safe_class_dirname(y_id, y_name)
+    class_dir.mkdir(parents=True, exist_ok=True)
     ts = datetime.now().strftime("%Y%m%d_%H%M%S_%f")
-    file_name = f"sample_{ts}_y{y_id:02d}.npz"
-    out_path = out_dir / file_name
+    file_name = f"sample_{ts}.npz"
+    out_path = class_dir / file_name
     np.savez_compressed(
         out_path,
         X=x_seq.astype(np.float32),
@@ -74,8 +83,10 @@ def save_sample(
         y_name=np.array(y_name),
         meta_json=np.array(json.dumps(meta, ensure_ascii=False)),
     )
+
+    rel_path = out_path.resolve().relative_to(data_dir.resolve())
     line = {
-        "path": str(out_path),
+        "path": str(rel_path).replace("\\", "/"),
         "y": int(y_id),
         "y_name": y_name,
         "meta": meta,
@@ -172,6 +183,7 @@ def main() -> None:
                         idx = np.linspace(0, len(seq) - 1, T).astype(np.int32)
                         seq = seq[idx]
 
+                    y_name = names[selected_id]
                     meta = {
                         "timestamp": datetime.now().isoformat(),
                         "fps_cam": float(fps),
@@ -181,9 +193,9 @@ def main() -> None:
                         "lighting_note": args.lighting_note,
                         "auto_mode": bool(auto_mode),
                         "auto_pause_seconds": float(args.auto_pause_seconds),
+                        "storage_subdir": f"{args.raw_subdir}/{safe_class_dirname(selected_id, y_name)}",
                     }
-                    y_name = names[selected_id]
-                    save_sample(seq, selected_id, y_name, raw_dir, manifest_path, meta)
+                    save_sample(seq, selected_id, y_name, raw_dir, manifest_path, data_dir, meta)
                     saved_counter[y_name] += 1
                     state = "READY"
                     if auto_mode:
