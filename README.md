@@ -26,7 +26,7 @@ pip install -r requirements.txt
 ## 2) Capturar dataset (webcam)
 
 ```bash
-python src/capture_dataset.py --data_dir data --window_seconds 1.5 --target_fps 15 --auto_pause_seconds 3
+python src/capture_dataset.py --data_dir data --window_seconds 1.5 --target_fps 15
 ```
 
 ### Teclas de captura
@@ -34,7 +34,6 @@ python src/capture_dataset.py --data_dir data --window_seconds 1.5 --target_fps 
 - `1..9`, `0`, `a..z`: seleccionan clases de gestos (`gesture_01`...`gesture_20`) según mapa mostrado en consola.
 - `n`: selecciona `NONE`.
 - `SPACE`: inicia cuenta atrás y graba **una** secuencia (sin solape).
-- `m`: activa/desactiva modo automático (graba secuencias sin parar, con pausa configurable entre muestras).
 - `r`: repetir (reinicia estado sin guardar).
 - `s`: imprime contadores de sesión por gesto.
 - `x` o `ESC`: salir.
