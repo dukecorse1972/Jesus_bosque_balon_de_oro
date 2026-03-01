@@ -62,6 +62,52 @@ def draw_overlay(frame: np.ndarray, lines: List[str]) -> None:
         y += 24
 
 
+def draw_big_text_center(frame: np.ndarray, text: str, font_scale: float = 5.0) -> None:
+    font = cv2.FONT_HERSHEY_SIMPLEX
+    thickness = max(2, int(round(font_scale * 2)))
+
+    (tw, th), _ = cv2.getTextSize(text, font, font_scale, thickness)
+    h, w = frame.shape[:2]
+    x = (w - tw) // 2
+    y = (h + th) // 2
+
+    cv2.putText(frame, text, (x + 8, y + 8), font, font_scale, (0, 0, 0), thickness + 2, cv2.LINE_AA)
+    cv2.putText(frame, text, (x, y), font, font_scale, (30, 255, 30), thickness, cv2.LINE_AA)
+
+
+def draw_text_top_center(frame: np.ndarray, text: str, y: int, font_scale: float) -> None:
+    """
+    Texto centrado arriba con sombra, tamaño configurable.
+    """
+    font = cv2.FONT_HERSHEY_SIMPLEX
+    thickness = max(1, int(round(font_scale * 2)))
+
+    (tw, th), _ = cv2.getTextSize(text, font, font_scale, thickness)
+    h, w = frame.shape[:2]
+    x = (w - tw) // 2
+
+    cv2.putText(frame, text, (x + 3, y + 3), font, font_scale, (0, 0, 0), thickness + 1, cv2.LINE_AA)
+    cv2.putText(frame, text, (x, y), font, font_scale, (30, 255, 30), thickness, cv2.LINE_AA)
+
+
+def draw_rec_bottom_right(frame: np.ndarray) -> None:
+    """
+    REC pequeño en esquina inferior derecha.
+    """
+    text = "REC"
+    font = cv2.FONT_HERSHEY_SIMPLEX
+    font_scale = 0.8
+    thickness = 2
+
+    (tw, th), _ = cv2.getTextSize(text, font, font_scale, thickness)
+    h, w = frame.shape[:2]
+    x = w - tw - 20
+    y = h - 20
+
+    cv2.putText(frame, text, (x + 2, y + 2), font, font_scale, (0, 0, 0), thickness + 1, cv2.LINE_AA)
+    cv2.putText(frame, text, (x, y), font, font_scale, (30, 255, 30), thickness, cv2.LINE_AA)
+
+
 def save_sample(
     x_seq: np.ndarray,
     y_id: int,
@@ -213,28 +259,55 @@ def main() -> None:
                     state = "READY"
 
                     # Programa siguiente inicio en modo auto:
-                    # auto_period_seconds es "inicio a inicio" (incluye window_seconds).
                     if auto_mode:
                         pause = max(0.0, args.auto_period_seconds - args.window_seconds)
                         auto_next_start = now + pause
 
-            lines = [
-                f"Gesture: {names[selected_id]} (id={selected_id})",
-                f"State: {state}",
-                f"Auto mode: {'ON' if auto_mode else 'OFF'}",
-                f"Auto period: {args.auto_period_seconds:.1f}s",
-                f"Saved total: {sum(saved_counter.values())}",
-                f"Saved this gesture: {saved_counter[names[selected_id]]}",
-                f"FPS: {fps:.1f}",
-                f"Window T={T}, F={TOTAL_FEATURES}",
-            ]
-            if state == "COUNTDOWN":
-                left = max(0, int(round(countdown_end - now)))
-                lines.append(f"Starting in: {left}")
-            if auto_mode and state == "READY":
-                lines.append(f"Next auto record in: {max(0.0, auto_next_start - now):.1f}s")
+            # --- OVERLAY ---
+            if auto_mode:
+                total = sum(saved_counter.values())
+                this_g = saved_counter[names[selected_id]]
 
-            draw_overlay(frame, lines)
+                # Todo pequeño excepto la cuenta atrás (y contadores grandes)
+                draw_text_top_center(frame, f"STATE: {state}", y=45, font_scale=1.0)
+
+                # Contadores GRANDES
+                draw_text_top_center(frame, f"TOTAL: {total}   |   THIS: {this_g}", y=90, font_scale=1.6)
+
+                # En descanso (READY en auto), mostrar cuánto falta (pequeño)
+                if state == "READY":
+                    left_wait = max(0.0, auto_next_start - now)
+                    draw_text_top_center(frame, f"NEXT REC IN: {left_wait:.1f}s", y=130, font_scale=0.9)
+
+                # Cuenta atrás GRANDE en el centro (no tocar)
+                if state == "COUNTDOWN":
+                    left = max(0, int(round(countdown_end - now)))
+                    left = max(1, left) if (countdown_end - now) > 0 else 0
+                    draw_big_text_center(frame, str(left), font_scale=5.0)
+
+                # REC pequeño abajo derecha
+                if state == "RECORDING":
+                    draw_rec_bottom_right(frame)
+
+            else:
+                # Manual: overlay completo como antes
+                lines = [
+                    f"Gesture: {names[selected_id]} (id={selected_id})",
+                    f"State: {state}",
+                    f"Auto mode: {'ON' if auto_mode else 'OFF'}",
+                    f"Auto period: {args.auto_period_seconds:.1f}s",
+                    f"Saved total: {sum(saved_counter.values())}",
+                    f"Saved this gesture: {saved_counter[names[selected_id]]}",
+                    f"FPS: {fps:.1f}",
+                    f"Window T={T}, F={TOTAL_FEATURES}",
+                ]
+                if state == "COUNTDOWN":
+                    left = max(0, int(round(countdown_end - now)))
+                    lines.append(f"Starting in: {left}")
+                if state == "READY":
+                    lines.append(f"Next auto record in: {max(0.0, auto_next_start - now):.1f}s")
+                draw_overlay(frame, lines)
+
             cv2.imshow("LSE Capture", frame)
 
             key = cv2.waitKey(1) & 0xFF
