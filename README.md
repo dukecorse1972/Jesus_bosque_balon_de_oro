@@ -26,7 +26,7 @@ pip install -r requirements.txt
 ## 2) Capturar dataset (webcam)
 
 ```bash
-python src/capture_dataset.py --data_dir data --window_seconds 1.5 --target_fps 15 --auto_pause_seconds 3
+python src/capture_dataset.py --data_dir data --window_seconds 1.5 --target_fps 15 --auto_period_seconds 3
 ```
 
 ### Teclas de captura
