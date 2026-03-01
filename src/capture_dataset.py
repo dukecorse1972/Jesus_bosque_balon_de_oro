@@ -106,7 +106,9 @@ def main() -> None:
     parser.add_argument("--target_fps", type=float, default=15.0)
     parser.add_argument("--camera_id", type=int, default=0)
     parser.add_argument("--countdown_seconds", type=int, default=3)
-    parser.add_argument("--auto_pause_seconds", type=float, default=3.0)
+
+    # Auto
+    parser.add_argument("--auto_period_seconds", type=float, default=2.0)
     parser.add_argument("--subject", type=str, default="self")
     parser.add_argument("--lighting_note", type=str, default="")
     args = parser.parse_args()
@@ -127,7 +129,7 @@ def main() -> None:
     for k, idx in keymap.items():
         print(f"  [{k}] -> {names[idx]} (id={idx})")
     print(
-        "SPACE=grabar 1 muestra | c/m=modo auto ON/OFF (pausa entre muestras) | "
+        "SPACE=grabar 1 muestra | c/m=modo auto ON/OFF (solo 1er countdown) | "
         "r=repetir | s=contadores | x/ESC=salir"
     )
 
@@ -143,8 +145,10 @@ def main() -> None:
     rec_start = 0.0
     frame_buffer: deque[np.ndarray] = deque(maxlen=T)
     saved_counter = Counter()
+
     auto_mode = False
     auto_next_start = 0.0
+    auto_first = True  # solo la primera vez se hace countdown
 
     prev_time = time.time()
     fps = 0.0
@@ -162,9 +166,18 @@ def main() -> None:
 
             feat, frame = extractor.extract_feature(frame, draw=True)
 
+            # Auto trigger:
+            # - Primera vez: COUNTDOWN
+            # - Siguientes: RECORDING directo (sin countdown)
             if auto_mode and state == "READY" and now >= auto_next_start:
-                state = "COUNTDOWN"
-                countdown_end = now + args.countdown_seconds
+                if auto_first:
+                    state = "COUNTDOWN"
+                    countdown_end = now + args.countdown_seconds
+                    auto_first = False
+                else:
+                    state = "RECORDING"
+                    rec_start = now
+                    frame_buffer.clear()
 
             if state == "COUNTDOWN" and now >= countdown_end:
                 state = "RECORDING"
@@ -192,19 +205,24 @@ def main() -> None:
                         "subject": args.subject,
                         "lighting_note": args.lighting_note,
                         "auto_mode": bool(auto_mode),
-                        "auto_pause_seconds": float(args.auto_pause_seconds),
+                        "auto_period_seconds": float(args.auto_period_seconds),
                         "storage_subdir": f"{args.raw_subdir}/{safe_class_dirname(selected_id, y_name)}",
                     }
                     save_sample(seq, selected_id, y_name, raw_dir, manifest_path, data_dir, meta)
                     saved_counter[y_name] += 1
                     state = "READY"
+
+                    # Programa siguiente inicio en modo auto:
+                    # auto_period_seconds es "inicio a inicio" (incluye window_seconds).
                     if auto_mode:
-                        auto_next_start = now + args.auto_pause_seconds
+                        pause = max(0.0, args.auto_period_seconds - args.window_seconds)
+                        auto_next_start = now + pause
 
             lines = [
                 f"Gesture: {names[selected_id]} (id={selected_id})",
                 f"State: {state}",
                 f"Auto mode: {'ON' if auto_mode else 'OFF'}",
+                f"Auto period: {args.auto_period_seconds:.1f}s",
                 f"Saved total: {sum(saved_counter.values())}",
                 f"Saved this gesture: {saved_counter[names[selected_id]]}",
                 f"FPS: {fps:.1f}",
@@ -228,8 +246,12 @@ def main() -> None:
             elif key in (ord("m"), ord("c")):
                 auto_mode = not auto_mode
                 if auto_mode:
+                    auto_first = True
                     auto_next_start = time.time()
-                    print(f"Modo automático ACTIVADO (pausa={args.auto_pause_seconds}s).")
+                    print(
+                        f"Modo automático ACTIVADO (periodo={args.auto_period_seconds}s, "
+                        f"countdown inicial={args.countdown_seconds}s)."
+                    )
                 else:
                     print("Modo automático DESACTIVADO.")
             elif key == ord("s"):
