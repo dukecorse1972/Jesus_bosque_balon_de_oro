@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import argparse
-import json
 import re
 import string
 import time
@@ -56,16 +55,7 @@ def safe_class_dirname(y_id: int, y_name: str) -> str:
 def draw_overlay(frame: np.ndarray, lines: List[str]) -> None:
     y = 24
     for line in lines:
-        cv2.putText(
-            frame,
-            line,
-            (10, y),
-            cv2.FONT_HERSHEY_SIMPLEX,
-            0.6,
-            (30, 255, 30),
-            2,
-            cv2.LINE_AA,
-        )
+        cv2.putText(frame, line, (10, y), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (30, 255, 30), 2, cv2.LINE_AA)
         y += 24
 
 
@@ -76,7 +66,6 @@ def draw_big_text_center(frame: np.ndarray, text: str, font_scale: float = 5.0) 
     h, w = frame.shape[:2]
     x = (w - tw) // 2
     y = (h + th) // 2
-
     cv2.putText(frame, text, (x + 8, y + 8), font, font_scale, (0, 0, 0), thickness + 2, cv2.LINE_AA)
     cv2.putText(frame, text, (x, y), font, font_scale, (30, 255, 30), thickness, cv2.LINE_AA)
 
@@ -87,7 +76,6 @@ def draw_text_top_center(frame: np.ndarray, text: str, y: int, font_scale: float
     (tw, th), _ = cv2.getTextSize(text, font, font_scale, thickness)
     _, w = frame.shape[:2]
     x = (w - tw) // 2
-
     cv2.putText(frame, text, (x + 3, y + 3), font, font_scale, (0, 0, 0), thickness + 1, cv2.LINE_AA)
     cv2.putText(frame, text, (x, y), font, font_scale, (30, 255, 30), thickness, cv2.LINE_AA)
 
@@ -95,13 +83,10 @@ def draw_text_top_center(frame: np.ndarray, text: str, y: int, font_scale: float
 def draw_rec_bottom_right(frame: np.ndarray) -> None:
     text = "REC"
     font = cv2.FONT_HERSHEY_SIMPLEX
-    font_scale = 0.8
-    thickness = 2
+    font_scale, thickness = 0.8, 2
     (tw, th), _ = cv2.getTextSize(text, font, font_scale, thickness)
     h, w = frame.shape[:2]
-    x = w - tw - 20
-    y = h - 20
-
+    x, y = w - tw - 20, h - 20
     cv2.putText(frame, text, (x + 2, y + 2), font, font_scale, (0, 0, 0), thickness + 1, cv2.LINE_AA)
     cv2.putText(frame, text, (x, y), font, font_scale, (30, 255, 30), thickness, cv2.LINE_AA)
 
@@ -111,33 +96,18 @@ def save_sample(
     y_id: int,
     y_name: str,
     out_dir: Path,
-    manifest_path: Path,
-    data_dir: Path,
-    meta: dict,
 ) -> Path:
+    """Guarda la muestra .npz en la carpeta de su clase. Sin manifest."""
     class_dir = out_dir / safe_class_dirname(y_id, y_name)
     class_dir.mkdir(parents=True, exist_ok=True)
     ts = datetime.now().strftime("%Y%m%d_%H%M%S_%f")
-    file_name = f"sample_{ts}.npz"
-    out_path = class_dir / file_name
-
+    out_path = class_dir / f"sample_{ts}.npz"
     np.savez_compressed(
         out_path,
         X=x_seq.astype(np.float32),
         y=np.int32(y_id),
         y_name=np.array(y_name),
-        meta_json=np.array(json.dumps(meta, ensure_ascii=False)),
     )
-
-    rel_path = out_path.resolve().relative_to(data_dir.resolve())
-    line = {
-        "path": str(rel_path).replace("\\", "/"),
-        "y": int(y_id),
-        "y_name": y_name,
-        "meta": meta,
-    }
-    with manifest_path.open("a", encoding="utf-8") as f:
-        f.write(json.dumps(line, ensure_ascii=False) + "\n")
     return out_path
 
 
@@ -149,7 +119,6 @@ def resample_sequence_nearest(
 ) -> np.ndarray:
     if total_steps <= 0:
         raise ValueError("total_steps debe ser > 0")
-
     if not features:
         return np.zeros((total_steps, TOTAL_FEATURES), dtype=np.float32)
 
@@ -159,12 +128,11 @@ def resample_sequence_nearest(
 
     right_idx = np.searchsorted(ts, sample_times, side="left")
     right_idx = np.clip(right_idx, 0, len(ts) - 1)
-    left_idx = np.clip(right_idx - 1, 0, len(ts) - 1)
+    left_idx  = np.clip(right_idx - 1, 0, len(ts) - 1)
 
-    left_dist = np.abs(sample_times - ts[left_idx])
+    left_dist  = np.abs(sample_times - ts[left_idx])
     right_dist = np.abs(ts[right_idx] - sample_times)
-    choose_right = right_dist < left_dist
-    final_idx = np.where(choose_right, right_idx, left_idx)
+    final_idx  = np.where(right_dist < left_dist, right_idx, left_idx)
     return feats[final_idx]
 
 
@@ -174,60 +142,55 @@ def start_recording(now: float) -> Tuple[str, float, List[np.ndarray], List[floa
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Captura dataset LSE aislado (MediaPipe Hands)")
-    parser.add_argument("--data_dir", type=str, default="data")
-    parser.add_argument("--raw_subdir", type=str, default="raw")
-    parser.add_argument("--manifest", type=str, default="manifest.jsonl")
-    parser.add_argument("--gestures_yaml", type=str, default="gestures.yaml")
-    parser.add_argument("--window_seconds", type=float, default=1.5)
-    parser.add_argument("--target_fps", type=float, default=15.0)
-    parser.add_argument("--camera_id", type=int, default=0)
-    parser.add_argument("--countdown_seconds", type=int, default=3)
+    parser.add_argument("--data_dir",            type=str,   default="data")
+    parser.add_argument("--raw_subdir",          type=str,   default="raw")
+    parser.add_argument("--gestures_yaml",       type=str,   default="gestures.yaml")
+    parser.add_argument("--window_seconds",      type=float, default=1.5)
+    parser.add_argument("--target_fps",          type=float, default=15.0)
+    parser.add_argument("--camera_id",           type=int,   default=0)
+    parser.add_argument("--countdown_seconds",   type=int,   default=3)
     parser.add_argument("--auto_period_seconds", type=float, default=3.0)
-    parser.add_argument("--subject", type=str, default="self")
-    parser.add_argument("--lighting_note", type=str, default="")
     args = parser.parse_args()
 
-    data_dir = Path(args.data_dir)
-    raw_dir = data_dir / args.raw_subdir
-    manifest_path = data_dir / args.manifest
+    data_dir      = Path(args.data_dir)
+    raw_dir       = data_dir / args.raw_subdir
     gestures_path = data_dir / args.gestures_yaml
     data_dir.mkdir(parents=True, exist_ok=True)
     raw_dir.mkdir(parents=True, exist_ok=True)
-    manifest_path.touch(exist_ok=True)
 
-    gestures = ensure_gestures_yaml(gestures_path)
+    gestures   = ensure_gestures_yaml(gestures_path)
     id_to_name = {int(k): str(v) for k, v in gestures["id_to_name"].items()}
-    names = [id_to_name[i] for i in sorted(id_to_name.keys())]
-    keymap = default_keymap(names)
+    names      = [id_to_name[i] for i in sorted(id_to_name.keys())]
+    keymap     = default_keymap(names)
 
     print("=== Mapa de teclas ===")
     for k, idx in keymap.items():
         print(f"  [{k}] -> {names[idx]} (id={idx})")
     print(
-        "SPACE=grabar 1 muestra | c/m=modo auto ON/OFF (solo 1er countdown) | "
+        "SPACE=grabar 1 muestra | c/m=modo auto ON/OFF | "
         "r=repetir | s=contadores | x/ESC=salir"
     )
 
-    T = compute_timesteps(args.window_seconds, args.target_fps)
+    T   = compute_timesteps(args.window_seconds, args.target_fps)
     cap = cv2.VideoCapture(args.camera_id)
     if not cap.isOpened():
         raise RuntimeError("No se pudo abrir la cámara.")
 
-    extractor = HandsFeatureExtractor()
+    extractor  = HandsFeatureExtractor()
     selected_id = 0
-    state = "READY"
+    state       = "READY"
     countdown_end = 0.0
-    rec_start = 0.0
+    rec_start     = 0.0
     recording_features: List[np.ndarray] = []
-    recording_times: List[float] = []
+    recording_times:    List[float]      = []
     saved_counter = Counter()
 
-    auto_mode = False
+    auto_mode      = False
     auto_next_start = 0.0
-    auto_first = True
+    auto_first     = True
 
     prev_time = time.time()
-    fps = 0.0
+    fps       = 0.0
 
     try:
         while True:
@@ -236,7 +199,7 @@ def main() -> None:
                 break
 
             now = time.time()
-            dt = max(now - prev_time, 1e-6)
+            dt  = max(now - prev_time, 1e-6)
             fps = 0.9 * fps + 0.1 * (1.0 / dt)
             prev_time = now
 
@@ -259,52 +222,29 @@ def main() -> None:
                 elapsed = now - rec_start
 
                 if elapsed >= args.window_seconds:
-                    seq = resample_sequence_nearest(
-                        features=recording_features,
-                        timestamps=recording_times,
-                        target_fps=args.target_fps,
-                        total_steps=T,
-                    )
+                    seq    = resample_sequence_nearest(recording_features, recording_times, args.target_fps, T)
                     y_name = names[selected_id]
-                    meta = {
-                        "timestamp": datetime.now().isoformat(),
-                        "fps_cam": float(fps),
-                        "window_seconds": float(args.window_seconds),
-                        "target_fps": float(args.target_fps),
-                        "num_timesteps": int(T),
-                        "subject": args.subject,
-                        "lighting_note": args.lighting_note,
-                        "auto_mode": bool(auto_mode),
-                        "auto_period_seconds": float(args.auto_period_seconds),
-                        "storage_subdir": f"{args.raw_subdir}/{safe_class_dirname(selected_id, y_name)}",
-                        "recorded_camera_frames": int(len(recording_features)),
-                        "recorded_duration_seconds": float(elapsed),
-                    }
-                    save_sample(seq, selected_id, y_name, raw_dir, manifest_path, data_dir, meta)
+                    save_sample(seq, selected_id, y_name, raw_dir)
                     saved_counter[y_name] += 1
                     state = "READY"
                     recording_features = []
-                    recording_times = []
+                    recording_times    = []
 
                     if auto_mode:
                         pause = max(0.0, args.auto_period_seconds - args.window_seconds)
                         auto_next_start = now + pause
 
             if auto_mode:
-                total = sum(saved_counter.values())
+                total  = sum(saved_counter.values())
                 this_g = saved_counter[names[selected_id]]
                 draw_text_top_center(frame, f"STATE: {state}", y=45, font_scale=1.0)
                 draw_text_top_center(frame, f"TOTAL: {total}   |   THIS: {this_g}", y=90, font_scale=1.6)
-
                 if state == "READY":
                     left_wait = max(0.0, auto_next_start - now)
                     draw_text_top_center(frame, f"NEXT REC IN: {left_wait:.1f}s", y=130, font_scale=0.9)
-
                 if state == "COUNTDOWN":
-                    left = max(0, int(round(countdown_end - now)))
-                    left = max(1, left) if (countdown_end - now) > 0 else 0
+                    left = max(1, int(round(countdown_end - now))) if (countdown_end - now) > 0 else 0
                     draw_big_text_center(frame, str(left), font_scale=5.0)
-
                 if state == "RECORDING":
                     draw_rec_bottom_right(frame)
             else:
@@ -337,12 +277,9 @@ def main() -> None:
             elif key in (ord("m"), ord("c")):
                 auto_mode = not auto_mode
                 if auto_mode:
-                    auto_first = True
+                    auto_first      = True
                     auto_next_start = time.time()
-                    print(
-                        f"Modo automático ACTIVADO (periodo={args.auto_period_seconds}s, "
-                        f"countdown inicial={args.countdown_seconds}s)."
-                    )
+                    print(f"Modo automático ACTIVADO (periodo={args.auto_period_seconds}s).")
                 else:
                     print("Modo automático DESACTIVADO.")
             elif key == ord("s"):
@@ -353,8 +290,8 @@ def main() -> None:
             elif key == ord("r"):
                 state = "READY"
                 recording_features = []
-                recording_times = []
-                print("Repetir habilitado: reinicia estado sin guardar.")
+                recording_times    = []
+                print("Estado reiniciado.")
             else:
                 kchar = chr(key).lower() if 0 <= key < 256 else ""
                 if kchar in keymap:

@@ -10,8 +10,8 @@ from sklearn.metrics import accuracy_score, f1_score
 
 from dataset_utils import (
     compute_class_weights,
+    discover_records,
     load_gestures_yaml,
-    load_manifest,
     load_npz_samples,
     make_tf_dataset,
     save_manifest,
@@ -25,20 +25,20 @@ from models import build_tcn, model_size_params
 
 def parse_args() -> argparse.Namespace:
     p = argparse.ArgumentParser(description="Entrenamiento TCN para gestos LSE")
-    p.add_argument("--data_dir", type=str, default="data")
-    p.add_argument("--manifest", type=str, default="manifest.jsonl")
-    p.add_argument("--gestures_yaml", type=str, default="gestures.yaml")
-    p.add_argument("--epochs", type=int, default=40)
-    p.add_argument("--batch_size", type=int, default=32)
-    p.add_argument("--lr", type=float, default=1e-3)
-    p.add_argument("--seed", type=int, default=42)
+    p.add_argument("--data_dir",     type=str,   default="data")
+    p.add_argument("--raw_subdir",   type=str,   default="raw")
+    p.add_argument("--gestures_yaml", type=str,  default="gestures.yaml")
+    p.add_argument("--epochs",       type=int,   default=40)
+    p.add_argument("--batch_size",   type=int,   default=32)
+    p.add_argument("--lr",           type=float, default=1e-3)
+    p.add_argument("--seed",         type=int,   default=42)
     p.add_argument("--use_class_weights", action="store_true")
-    p.add_argument("--augment", action="store_true")
-    p.add_argument("--model_size", type=str, default="small", choices=["small", "medium"])
-    p.add_argument("--train_size", type=float, default=0.70)
-    p.add_argument("--val_size", type=float, default=0.15)
-    p.add_argument("--test_size", type=float, default=0.15)
-    p.add_argument("--outputs_dir", type=str, default="outputs")
+    p.add_argument("--augment",      action="store_true")
+    p.add_argument("--model_size",   type=str,   default="small", choices=["small", "medium"])
+    p.add_argument("--train_size",   type=float, default=0.70)
+    p.add_argument("--val_size",     type=float, default=0.15)
+    p.add_argument("--test_size",    type=float, default=0.15)
+    p.add_argument("--outputs_dir",  type=str,   default="outputs")
     return p.parse_args()
 
 
@@ -46,14 +46,15 @@ def main() -> None:
     args = parse_args()
     tf.keras.utils.set_random_seed(args.seed)
 
-    data_dir = Path(args.data_dir)
-    manifest_path = data_dir / args.manifest
+    data_dir      = Path(args.data_dir)
+    raw_dir       = data_dir / args.raw_subdir
     gestures_path = data_dir / args.gestures_yaml
 
     gesture_names, _ = load_gestures_yaml(gestures_path)
     num_classes = len(gesture_names)
 
-    records = load_manifest(manifest_path)
+    # Descubrir muestras desde disco (sin manifest)
+    records = discover_records(raw_dir, data_dir, gesture_names)
     validate_records_against_gestures(records, gesture_names)
 
     tr_rec, va_rec, te_rec = stratified_split(
@@ -65,27 +66,28 @@ def main() -> None:
     )
 
     x_train, y_train = load_npz_samples(tr_rec, data_dir, strict_missing=True)
-    x_val, y_val = load_npz_samples(va_rec, data_dir, strict_missing=True)
-    x_test, y_test = load_npz_samples(te_rec, data_dir, strict_missing=True)
+    x_val,   y_val   = load_npz_samples(va_rec, data_dir, strict_missing=True)
+    x_test,  y_test  = load_npz_samples(te_rec, data_dir, strict_missing=True)
 
     train_ds = make_tf_dataset(x_train, y_train, args.batch_size, training=True, augment=args.augment)
-    val_ds = make_tf_dataset(x_val, y_val, args.batch_size, training=False)
-    test_ds = make_tf_dataset(x_test, y_test, args.batch_size, training=False)
+    val_ds   = make_tf_dataset(x_val,   y_val,   args.batch_size, training=False)
+    test_ds  = make_tf_dataset(x_test,  y_test,  args.batch_size, training=False)
 
     params = model_size_params(args.model_size)
-    model = build_tcn(input_shape=x_train.shape[1:], num_classes=num_classes, **params)
+    model  = build_tcn(input_shape=x_train.shape[1:], num_classes=num_classes, **params)
     model.compile(
         optimizer=tf.keras.optimizers.Adam(args.lr),
         loss="sparse_categorical_crossentropy",
         metrics=["accuracy"],
     )
 
-    out = Path(args.outputs_dir)
-    ckpt_dir = out / "checkpoints"
+    out      = Path(args.outputs_dir)
+    ckpt_dir   = out / "checkpoints"
     splits_dir = out / "splits"
     ckpt_dir.mkdir(parents=True, exist_ok=True)
     splits_dir.mkdir(parents=True, exist_ok=True)
 
+    # Guardar splits para evaluación reproducible
     save_manifest(tr_rec, splits_dir / "train.jsonl")
     save_manifest(va_rec, splits_dir / "val.jsonl")
     save_manifest(te_rec, splits_dir / "test.jsonl")
@@ -124,8 +126,8 @@ def main() -> None:
     if best_path.exists():
         model = tf.keras.models.load_model(best_path)
 
-    probs = model.predict(test_ds, verbose=0)
-    y_pred = np.argmax(probs, axis=1)
+    probs    = model.predict(test_ds, verbose=0)
+    y_pred   = np.argmax(probs, axis=1)
     test_acc = accuracy_score(y_test, y_pred)
     macro_f1 = f1_score(y_test, y_pred, average="macro", zero_division=0)
     print(f"Test accuracy: {test_acc:.4f}")

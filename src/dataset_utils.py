@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import re
 from collections import Counter
 from dataclasses import dataclass
 from pathlib import Path
@@ -129,6 +130,55 @@ def validate_records_against_gestures(records: Sequence[SampleRecord], gesture_n
             "Hay clases definidas en gestures.yaml sin muestras en el manifest. "
             f"IDs ausentes: {missing_ids}; nombres: {missing_names}."
         )
+
+
+def discover_records(
+    raw_dir: str | Path,
+    data_dir: str | Path,
+    gesture_names: Sequence[str],
+) -> List[SampleRecord]:
+    """Descubre muestras escaneando raw_dir sin necesitar manifest.
+    Cada subcarpeta debe tener formato '<id>_<nombre>', e.g. '00_HOLA'.
+    """
+    raw_dir = Path(raw_dir)
+    data_dir = Path(data_dir)
+
+    if not raw_dir.exists():
+        raise FileNotFoundError(f"No existe la carpeta de datos: {raw_dir}")
+
+    records: List[SampleRecord] = []
+
+    for class_dir in sorted(raw_dir.iterdir()):
+        if not class_dir.is_dir():
+            continue
+        m = re.match(r"^(\d+)_(.+)$", class_dir.name)
+        if not m:
+            continue
+        y_id = int(m.group(1))
+        y_name = m.group(2)
+
+        if y_id >= len(gesture_names):
+            raise ValueError(
+                f"Carpeta '{class_dir.name}': id={y_id} fuera de rango en gestures.yaml "
+                f"(solo hay {len(gesture_names)} clases)."
+            )
+        expected = gesture_names[y_id]
+        if y_name != expected:
+            raise ValueError(
+                f"Carpeta '{class_dir.name}': nombre '{y_name}' no coincide con "
+                f"gestures.yaml (esperado '{expected}' para id={y_id})."
+            )
+
+        for npz_path in sorted(class_dir.glob("sample_*.npz")):
+            rel = npz_path.resolve().relative_to(data_dir.resolve())
+            records.append(SampleRecord(
+                path=str(rel).replace("\\", "/"),
+                y=y_id,
+                y_name=y_name,
+                meta={},
+            ))
+
+    return records
 
 
 def resolve_sample_path(record_path: str | Path, data_dir: str | Path) -> Path | None:
