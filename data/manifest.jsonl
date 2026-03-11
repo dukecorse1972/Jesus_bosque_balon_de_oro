@@ -1,41 +1,325 @@
-{"path": "raw/00_HOLA/sample_20260301_163055_367789.npz", "y": 0, "y_name": "HOLA", "meta": {"timestamp": "2026-03-01T16:30:55.367789", "fps_cam": 20.975525572186342, "window_seconds": 1.5, "target_fps": 15.0, "subject": "self", "lighting_note": "", "auto_mode": false, "auto_pause_seconds": 3.0, "storage_subdir": "raw/00_HOLA"}}
-{"path": "raw/00_HOLA/sample_20260301_163249_137802.npz", "y": 0, "y_name": "HOLA", "meta": {"timestamp": "2026-03-01T16:32:49.137802", "fps_cam": 18.450332132328835, "window_seconds": 1.5, "target_fps": 15.0, "subject": "self", "lighting_note": "", "auto_mode": true, "auto_pause_seconds": 3.0, "storage_subdir": "raw/00_HOLA"}}
-{"path": "raw/00_HOLA/sample_20260301_163256_735377.npz", "y": 0, "y_name": "HOLA", "meta": {"timestamp": "2026-03-01T16:32:56.735377", "fps_cam": 19.234698007862654, "window_seconds": 1.5, "target_fps": 15.0, "subject": "self", "lighting_note": "", "auto_mode": true, "auto_pause_seconds": 3.0, "storage_subdir": "raw/00_HOLA"}}
-{"path": "raw/00_HOLA/sample_20260301_163304_307570.npz", "y": 0, "y_name": "HOLA", "meta": {"timestamp": "2026-03-01T16:33:04.307570", "fps_cam": 22.072616334553928, "window_seconds": 1.5, "target_fps": 15.0, "subject": "self", "lighting_note": "", "auto_mode": true, "auto_pause_seconds": 3.0, "storage_subdir": "raw/00_HOLA"}}
-{"path": "raw/00_HOLA/sample_20260301_163311_833407.npz", "y": 0, "y_name": "HOLA", "meta": {"timestamp": "2026-03-01T16:33:11.833407", "fps_cam": 20.527443047759068, "window_seconds": 1.5, "target_fps": 15.0, "subject": "self", "lighting_note": "", "auto_mode": true, "auto_pause_seconds": 3.0, "storage_subdir": "raw/00_HOLA"}}
-{"path": "raw/00_HOLA/sample_20260301_163319_382880.npz", "y": 0, "y_name": "HOLA", "meta": {"timestamp": "2026-03-01T16:33:19.382880", "fps_cam": 21.09320697095939, "window_seconds": 1.5, "target_fps": 15.0, "subject": "self", "lighting_note": "", "auto_mode": true, "auto_pause_seconds": 3.0, "storage_subdir": "raw/00_HOLA"}}
-{"path": "raw/00_HOLA/sample_20260301_163326_953917.npz", "y": 0, "y_name": "HOLA", "meta": {"timestamp": "2026-03-01T16:33:26.953917", "fps_cam": 20.940070537476906, "window_seconds": 1.5, "target_fps": 15.0, "subject": "self", "lighting_note": "", "auto_mode": true, "auto_pause_seconds": 3.0, "storage_subdir": "raw/00_HOLA"}}
-{"path": "raw/00_HOLA/sample_20260301_163334_546304.npz", "y": 0, "y_name": "HOLA", "meta": {"timestamp": "2026-03-01T16:33:34.544275", "fps_cam": 21.264538930167845, "window_seconds": 1.5, "target_fps": 15.0, "subject": "self", "lighting_note": "", "auto_mode": true, "auto_pause_seconds": 3.0, "storage_subdir": "raw/00_HOLA"}}
-{"path": "raw/00_HOLA/sample_20260301_163342_097045.npz", "y": 0, "y_name": "HOLA", "meta": {"timestamp": "2026-03-01T16:33:42.096039", "fps_cam": 20.851710766413596, "window_seconds": 1.5, "target_fps": 15.0, "subject": "self", "lighting_note": "", "auto_mode": true, "auto_pause_seconds": 3.0, "storage_subdir": "raw/00_HOLA"}}
-{"path": "raw/00_HOLA/sample_20260301_163451_997563.npz", "y": 0, "y_name": "HOLA", "meta": {"timestamp": "2026-03-01T16:34:51.995555", "fps_cam": 18.626667282048675, "window_seconds": 1.5, "target_fps": 15.0, "subject": "self", "lighting_note": "", "auto_mode": true, "auto_pause_seconds": 3.0, "storage_subdir": "raw/00_HOLA"}}
-{"path": "raw/00_HOLA/sample_20260301_163518_779598.npz", "y": 0, "y_name": "HOLA", "meta": {"timestamp": "2026-03-01T16:35:18.779598", "fps_cam": 24.82809701470353, "window_seconds": 1.5, "target_fps": 15.0, "subject": "self", "lighting_note": "", "auto_mode": true, "auto_pause_seconds": 3.0, "storage_subdir": "raw/00_HOLA"}}
-{"path": "raw/00_HOLA/sample_20260301_163524_122093.npz", "y": 0, "y_name": "HOLA", "meta": {"timestamp": "2026-03-01T16:35:24.121574", "fps_cam": 26.34034282097187, "window_seconds": 1.5, "target_fps": 15.0, "subject": "self", "lighting_note": "", "auto_mode": false, "auto_pause_seconds": 3.0, "storage_subdir": "raw/00_HOLA"}}
-{"path": "raw/00_HOLA/sample_20260301_163529_053168.npz", "y": 0, "y_name": "HOLA", "meta": {"timestamp": "2026-03-01T16:35:29.053168", "fps_cam": 26.107474368267873, "window_seconds": 1.5, "target_fps": 15.0, "subject": "self", "lighting_note": "", "auto_mode": true, "auto_pause_seconds": 3.0, "storage_subdir": "raw/00_HOLA"}}
-{"path": "raw/00_HOLA/sample_20260301_163932_092517.npz", "y": 0, "y_name": "HOLA", "meta": {"timestamp": "2026-03-01T16:39:32.092517", "fps_cam": 19.659044514686727, "window_seconds": 1.5, "target_fps": 15.0, "subject": "self", "lighting_note": "", "auto_mode": true, "auto_pause_seconds": 3.0, "storage_subdir": "raw/00_HOLA"}}
-{"path": "raw/00_HOLA/sample_20260301_163939_691022.npz", "y": 0, "y_name": "HOLA", "meta": {"timestamp": "2026-03-01T16:39:39.690000", "fps_cam": 21.56289635583479, "window_seconds": 1.5, "target_fps": 15.0, "subject": "self", "lighting_note": "", "auto_mode": true, "auto_pause_seconds": 3.0, "storage_subdir": "raw/00_HOLA"}}
-{"path": "raw/00_HOLA/sample_20260301_163947_256292.npz", "y": 0, "y_name": "HOLA", "meta": {"timestamp": "2026-03-01T16:39:47.256292", "fps_cam": 17.277301926593257, "window_seconds": 1.5, "target_fps": 15.0, "subject": "self", "lighting_note": "", "auto_mode": true, "auto_pause_seconds": 3.0, "storage_subdir": "raw/00_HOLA"}}
-{"path": "raw/00_HOLA/sample_20260301_163954_825090.npz", "y": 0, "y_name": "HOLA", "meta": {"timestamp": "2026-03-01T16:39:54.825090", "fps_cam": 17.683189395537987, "window_seconds": 1.5, "target_fps": 15.0, "subject": "self", "lighting_note": "", "auto_mode": true, "auto_pause_seconds": 3.0, "storage_subdir": "raw/00_HOLA"}}
-{"path": "raw/00_HOLA/sample_20260301_164002_399261.npz", "y": 0, "y_name": "HOLA", "meta": {"timestamp": "2026-03-01T16:40:02.399261", "fps_cam": 20.947178736765593, "window_seconds": 1.5, "target_fps": 15.0, "subject": "self", "lighting_note": "", "auto_mode": true, "auto_pause_seconds": 3.0, "storage_subdir": "raw/00_HOLA"}}
-{"path": "raw/00_HOLA/sample_20260301_164009_988244.npz", "y": 0, "y_name": "HOLA", "meta": {"timestamp": "2026-03-01T16:40:09.988244", "fps_cam": 20.353928570977814, "window_seconds": 1.5, "target_fps": 15.0, "subject": "self", "lighting_note": "", "auto_mode": true, "auto_pause_seconds": 3.0, "storage_subdir": "raw/00_HOLA"}}
-{"path": "raw/00_HOLA/sample_20260301_164017_592196.npz", "y": 0, "y_name": "HOLA", "meta": {"timestamp": "2026-03-01T16:40:17.592196", "fps_cam": 19.48668654456956, "window_seconds": 1.5, "target_fps": 15.0, "subject": "self", "lighting_note": "", "auto_mode": true, "auto_pause_seconds": 3.0, "storage_subdir": "raw/00_HOLA"}}
-{"path": "raw/00_HOLA/sample_20260301_164025_172049.npz", "y": 0, "y_name": "HOLA", "meta": {"timestamp": "2026-03-01T16:40:25.172049", "fps_cam": 20.99225044560734, "window_seconds": 1.5, "target_fps": 15.0, "subject": "self", "lighting_note": "", "auto_mode": true, "auto_pause_seconds": 3.0, "storage_subdir": "raw/00_HOLA"}}
-{"path": "raw/00_HOLA/sample_20260301_164032_789898.npz", "y": 0, "y_name": "HOLA", "meta": {"timestamp": "2026-03-01T16:40:32.787835", "fps_cam": 21.393391847892836, "window_seconds": 1.5, "target_fps": 15.0, "subject": "self", "lighting_note": "", "auto_mode": true, "auto_pause_seconds": 3.0, "storage_subdir": "raw/00_HOLA"}}
-{"path": "raw/00_HOLA/sample_20260301_164040_373436.npz", "y": 0, "y_name": "HOLA", "meta": {"timestamp": "2026-03-01T16:40:40.373436", "fps_cam": 19.56715381444584, "window_seconds": 1.5, "target_fps": 15.0, "subject": "self", "lighting_note": "", "auto_mode": true, "auto_pause_seconds": 3.0, "storage_subdir": "raw/00_HOLA"}}
-{"path": "raw/00_HOLA/sample_20260301_164047_963276.npz", "y": 0, "y_name": "HOLA", "meta": {"timestamp": "2026-03-01T16:40:47.963276", "fps_cam": 19.963856518647564, "window_seconds": 1.5, "target_fps": 15.0, "subject": "self", "lighting_note": "", "auto_mode": true, "auto_pause_seconds": 3.0, "storage_subdir": "raw/00_HOLA"}}
-{"path": "raw/00_HOLA/sample_20260301_164055_533121.npz", "y": 0, "y_name": "HOLA", "meta": {"timestamp": "2026-03-01T16:40:55.531924", "fps_cam": 21.033517653619274, "window_seconds": 1.5, "target_fps": 15.0, "subject": "self", "lighting_note": "", "auto_mode": true, "auto_pause_seconds": 3.0, "storage_subdir": "raw/00_HOLA"}}
-{"path": "raw/00_HOLA/sample_20260301_164103_072334.npz", "y": 0, "y_name": "HOLA", "meta": {"timestamp": "2026-03-01T16:41:03.072334", "fps_cam": 20.75433908566462, "window_seconds": 1.5, "target_fps": 15.0, "subject": "self", "lighting_note": "", "auto_mode": true, "auto_pause_seconds": 3.0, "storage_subdir": "raw/00_HOLA"}}
-{"path": "raw/00_HOLA/sample_20260301_164110_624166.npz", "y": 0, "y_name": "HOLA", "meta": {"timestamp": "2026-03-01T16:41:10.624166", "fps_cam": 20.676136823394312, "window_seconds": 1.5, "target_fps": 15.0, "subject": "self", "lighting_note": "", "auto_mode": true, "auto_pause_seconds": 3.0, "storage_subdir": "raw/00_HOLA"}}
-{"path": "raw/00_HOLA/sample_20260301_164118_229765.npz", "y": 0, "y_name": "HOLA", "meta": {"timestamp": "2026-03-01T16:41:18.229765", "fps_cam": 19.21527921646847, "window_seconds": 1.5, "target_fps": 15.0, "subject": "self", "lighting_note": "", "auto_mode": true, "auto_pause_seconds": 3.0, "storage_subdir": "raw/00_HOLA"}}
-{"path": "raw/00_HOLA/sample_20260301_164125_748042.npz", "y": 0, "y_name": "HOLA", "meta": {"timestamp": "2026-03-01T16:41:25.748042", "fps_cam": 20.838385262559058, "window_seconds": 1.5, "target_fps": 15.0, "subject": "self", "lighting_note": "", "auto_mode": true, "auto_pause_seconds": 3.0, "storage_subdir": "raw/00_HOLA"}}
-{"path": "raw/00_HOLA/sample_20260301_164246_969400.npz", "y": 0, "y_name": "HOLA", "meta": {"timestamp": "2026-03-01T16:42:46.968874", "fps_cam": 21.490649643031546, "window_seconds": 1.5, "target_fps": 15.0, "subject": "self", "lighting_note": "", "auto_mode": true, "auto_period_seconds": 3.0, "storage_subdir": "raw/00_HOLA"}}
-{"path": "raw/00_HOLA/sample_20260301_164250_047747.npz", "y": 0, "y_name": "HOLA", "meta": {"timestamp": "2026-03-01T16:42:50.046687", "fps_cam": 19.361478903217225, "window_seconds": 1.5, "target_fps": 15.0, "subject": "self", "lighting_note": "", "auto_mode": true, "auto_period_seconds": 3.0, "storage_subdir": "raw/00_HOLA"}}
-{"path": "raw/00_HOLA/sample_20260301_164253_092213.npz", "y": 0, "y_name": "HOLA", "meta": {"timestamp": "2026-03-01T16:42:53.092213", "fps_cam": 21.29035540613333, "window_seconds": 1.5, "target_fps": 15.0, "subject": "self", "lighting_note": "", "auto_mode": true, "auto_period_seconds": 3.0, "storage_subdir": "raw/00_HOLA"}}
-{"path": "raw/00_HOLA/sample_20260301_164256_157564.npz", "y": 0, "y_name": "HOLA", "meta": {"timestamp": "2026-03-01T16:42:56.157564", "fps_cam": 20.237518641134216, "window_seconds": 1.5, "target_fps": 15.0, "subject": "self", "lighting_note": "", "auto_mode": true, "auto_period_seconds": 3.0, "storage_subdir": "raw/00_HOLA"}}
-{"path": "raw/00_HOLA/sample_20260301_164302_088935.npz", "y": 0, "y_name": "HOLA", "meta": {"timestamp": "2026-03-01T16:43:02.088935", "fps_cam": 19.75154334340461, "window_seconds": 1.5, "target_fps": 15.0, "subject": "self", "lighting_note": "", "auto_mode": false, "auto_period_seconds": 3.0, "storage_subdir": "raw/00_HOLA"}}
-{"path": "raw/00_HOLA/sample_20260301_164307_296274.npz", "y": 0, "y_name": "HOLA", "meta": {"timestamp": "2026-03-01T16:43:07.296274", "fps_cam": 24.886347712116603, "window_seconds": 1.5, "target_fps": 15.0, "subject": "self", "lighting_note": "", "auto_mode": false, "auto_period_seconds": 3.0, "storage_subdir": "raw/00_HOLA"}}
-{"path": "raw/00_HOLA/sample_20260301_171923_674549.npz", "y": 0, "y_name": "HOLA", "meta": {"timestamp": "2026-03-01T17:19:23.674549", "fps_cam": 19.563326061758406, "window_seconds": 1.5, "target_fps": 15.0, "subject": "self", "lighting_note": "", "auto_mode": true, "auto_period_seconds": 3.0, "storage_subdir": "raw/00_HOLA"}}
-{"path": "raw/00_HOLA/sample_20260301_172006_587777.npz", "y": 0, "y_name": "HOLA", "meta": {"timestamp": "2026-03-01T17:20:06.587777", "fps_cam": 20.059120832906725, "window_seconds": 1.5, "target_fps": 15.0, "subject": "self", "lighting_note": "", "auto_mode": true, "auto_period_seconds": 3.0, "storage_subdir": "raw/00_HOLA"}}
-{"path": "raw/00_HOLA/sample_20260301_172009_610479.npz", "y": 0, "y_name": "HOLA", "meta": {"timestamp": "2026-03-01T17:20:09.610479", "fps_cam": 19.978371772120365, "window_seconds": 1.5, "target_fps": 15.0, "subject": "self", "lighting_note": "", "auto_mode": true, "auto_period_seconds": 3.0, "storage_subdir": "raw/00_HOLA"}}
-{"path": "raw/00_HOLA/sample_20260301_172012_696115.npz", "y": 0, "y_name": "HOLA", "meta": {"timestamp": "2026-03-01T17:20:12.696115", "fps_cam": 18.175236955761754, "window_seconds": 1.5, "target_fps": 15.0, "subject": "self", "lighting_note": "", "auto_mode": true, "auto_period_seconds": 3.0, "storage_subdir": "raw/00_HOLA"}}
-{"path": "raw/00_HOLA/sample_20260301_172015_784539.npz", "y": 0, "y_name": "HOLA", "meta": {"timestamp": "2026-03-01T17:20:15.784539", "fps_cam": 18.205745323735016, "window_seconds": 1.5, "target_fps": 15.0, "subject": "self", "lighting_note": "", "auto_mode": true, "auto_period_seconds": 3.0, "storage_subdir": "raw/00_HOLA"}}
-{"path": "raw/00_HOLA/sample_20260301_172018_830201.npz", "y": 0, "y_name": "HOLA", "meta": {"timestamp": "2026-03-01T17:20:18.830201", "fps_cam": 19.254199434809912, "window_seconds": 1.5, "target_fps": 15.0, "subject": "self", "lighting_note": "", "auto_mode": true, "auto_period_seconds": 3.0, "storage_subdir": "raw/00_HOLA"}}
+{"path": "raw\\00_HOLA\\sample_20260308_205121_889677.npz", "y": 0, "y_name": "HOLA", "meta": {}}
+{"path": "raw\\00_HOLA\\sample_20260308_205124_965286.npz", "y": 0, "y_name": "HOLA", "meta": {}}
+{"path": "raw\\00_HOLA\\sample_20260308_205127_972716.npz", "y": 0, "y_name": "HOLA", "meta": {}}
+{"path": "raw\\00_HOLA\\sample_20260308_205131_026365.npz", "y": 0, "y_name": "HOLA", "meta": {}}
+{"path": "raw\\00_HOLA\\sample_20260308_205134_099754.npz", "y": 0, "y_name": "HOLA", "meta": {}}
+{"path": "raw\\00_HOLA\\sample_20260308_205137_151565.npz", "y": 0, "y_name": "HOLA", "meta": {}}
+{"path": "raw\\00_HOLA\\sample_20260308_205140_156439.npz", "y": 0, "y_name": "HOLA", "meta": {}}
+{"path": "raw\\00_HOLA\\sample_20260308_205143_248047.npz", "y": 0, "y_name": "HOLA", "meta": {}}
+{"path": "raw\\00_HOLA\\sample_20260308_205146_279097.npz", "y": 0, "y_name": "HOLA", "meta": {}}
+{"path": "raw\\00_HOLA\\sample_20260308_205149_357790.npz", "y": 0, "y_name": "HOLA", "meta": {}}
+{"path": "raw\\00_HOLA\\sample_20260308_205152_347009.npz", "y": 0, "y_name": "HOLA", "meta": {}}
+{"path": "raw\\00_HOLA\\sample_20260308_205155_412973.npz", "y": 0, "y_name": "HOLA", "meta": {}}
+{"path": "raw\\00_HOLA\\sample_20260308_205158_477561.npz", "y": 0, "y_name": "HOLA", "meta": {}}
+{"path": "raw\\00_HOLA\\sample_20260308_205201_560557.npz", "y": 0, "y_name": "HOLA", "meta": {}}
+{"path": "raw\\00_HOLA\\sample_20260308_205204_609605.npz", "y": 0, "y_name": "HOLA", "meta": {}}
+{"path": "raw\\00_HOLA\\sample_20260308_205207_663036.npz", "y": 0, "y_name": "HOLA", "meta": {}}
+{"path": "raw\\00_HOLA\\sample_20260308_205210_689183.npz", "y": 0, "y_name": "HOLA", "meta": {}}
+{"path": "raw\\00_HOLA\\sample_20260308_205213_757487.npz", "y": 0, "y_name": "HOLA", "meta": {}}
+{"path": "raw\\00_HOLA\\sample_20260308_205216_932917.npz", "y": 0, "y_name": "HOLA", "meta": {}}
+{"path": "raw\\00_HOLA\\sample_20260308_205219_943179.npz", "y": 0, "y_name": "HOLA", "meta": {}}
+{"path": "raw\\00_HOLA\\sample_20260308_205223_026482.npz", "y": 0, "y_name": "HOLA", "meta": {}}
+{"path": "raw\\00_HOLA\\sample_20260308_205226_084292.npz", "y": 0, "y_name": "HOLA", "meta": {}}
+{"path": "raw\\00_HOLA\\sample_20260308_205229_175361.npz", "y": 0, "y_name": "HOLA", "meta": {}}
+{"path": "raw\\00_HOLA\\sample_20260308_205232_281293.npz", "y": 0, "y_name": "HOLA", "meta": {}}
+{"path": "raw\\00_HOLA\\sample_20260308_205235_330048.npz", "y": 0, "y_name": "HOLA", "meta": {}}
+{"path": "raw\\00_HOLA\\sample_20260308_205238_390343.npz", "y": 0, "y_name": "HOLA", "meta": {}}
+{"path": "raw\\00_HOLA\\sample_20260308_205241_417029.npz", "y": 0, "y_name": "HOLA", "meta": {}}
+{"path": "raw\\00_HOLA\\sample_20260308_205244_523485.npz", "y": 0, "y_name": "HOLA", "meta": {}}
+{"path": "raw\\00_HOLA\\sample_20260308_205247_575051.npz", "y": 0, "y_name": "HOLA", "meta": {}}
+{"path": "raw\\00_HOLA\\sample_20260308_205250_581011.npz", "y": 0, "y_name": "HOLA", "meta": {}}
+{"path": "raw\\00_HOLA\\sample_20260308_205253_645302.npz", "y": 0, "y_name": "HOLA", "meta": {}}
+{"path": "raw\\00_HOLA\\sample_20260308_205256_616597.npz", "y": 0, "y_name": "HOLA", "meta": {}}
+{"path": "raw\\00_HOLA\\sample_20260308_205259_662170.npz", "y": 0, "y_name": "HOLA", "meta": {}}
+{"path": "raw\\00_HOLA\\sample_20260308_205302_727559.npz", "y": 0, "y_name": "HOLA", "meta": {}}
+{"path": "raw\\00_HOLA\\sample_20260308_205305_793004.npz", "y": 0, "y_name": "HOLA", "meta": {}}
+{"path": "raw\\00_HOLA\\sample_20260308_205308_863477.npz", "y": 0, "y_name": "HOLA", "meta": {}}
+{"path": "raw\\00_HOLA\\sample_20260308_205311_939407.npz", "y": 0, "y_name": "HOLA", "meta": {}}
+{"path": "raw\\00_HOLA\\sample_20260308_205601_026525.npz", "y": 0, "y_name": "HOLA", "meta": {}}
+{"path": "raw\\00_HOLA\\sample_20260308_205604_104822.npz", "y": 0, "y_name": "HOLA", "meta": {}}
+{"path": "raw\\00_HOLA\\sample_20260308_205607_176640.npz", "y": 0, "y_name": "HOLA", "meta": {}}
+{"path": "raw\\00_HOLA\\sample_20260308_205610_221085.npz", "y": 0, "y_name": "HOLA", "meta": {}}
+{"path": "raw\\00_HOLA\\sample_20260308_205613_263151.npz", "y": 0, "y_name": "HOLA", "meta": {}}
+{"path": "raw\\00_HOLA\\sample_20260308_205616_322273.npz", "y": 0, "y_name": "HOLA", "meta": {}}
+{"path": "raw\\00_HOLA\\sample_20260308_205619_334208.npz", "y": 0, "y_name": "HOLA", "meta": {}}
+{"path": "raw\\00_HOLA\\sample_20260308_205622_427469.npz", "y": 0, "y_name": "HOLA", "meta": {}}
+{"path": "raw\\00_HOLA\\sample_20260308_205658_147220.npz", "y": 0, "y_name": "HOLA", "meta": {}}
+{"path": "raw\\00_HOLA\\sample_20260308_205701_183830.npz", "y": 0, "y_name": "HOLA", "meta": {}}
+{"path": "raw\\00_HOLA\\sample_20260308_205704_239009.npz", "y": 0, "y_name": "HOLA", "meta": {}}
+{"path": "raw\\00_HOLA\\sample_20260308_205707_286569.npz", "y": 0, "y_name": "HOLA", "meta": {}}
+{"path": "raw\\00_HOLA\\sample_20260308_205710_330973.npz", "y": 0, "y_name": "HOLA", "meta": {}}
+{"path": "raw\\01_ADIOS\\sample_20260308_214726_722017.npz", "y": 1, "y_name": "ADIOS", "meta": {}}
+{"path": "raw\\01_ADIOS\\sample_20260308_214729_837525.npz", "y": 1, "y_name": "ADIOS", "meta": {}}
+{"path": "raw\\01_ADIOS\\sample_20260308_214732_937611.npz", "y": 1, "y_name": "ADIOS", "meta": {}}
+{"path": "raw\\01_ADIOS\\sample_20260308_214736_004973.npz", "y": 1, "y_name": "ADIOS", "meta": {}}
+{"path": "raw\\01_ADIOS\\sample_20260308_214739_092597.npz", "y": 1, "y_name": "ADIOS", "meta": {}}
+{"path": "raw\\01_ADIOS\\sample_20260308_214742_129366.npz", "y": 1, "y_name": "ADIOS", "meta": {}}
+{"path": "raw\\01_ADIOS\\sample_20260308_214745_134948.npz", "y": 1, "y_name": "ADIOS", "meta": {}}
+{"path": "raw\\01_ADIOS\\sample_20260308_214748_182565.npz", "y": 1, "y_name": "ADIOS", "meta": {}}
+{"path": "raw\\01_ADIOS\\sample_20260308_214751_231924.npz", "y": 1, "y_name": "ADIOS", "meta": {}}
+{"path": "raw\\01_ADIOS\\sample_20260308_214754_263243.npz", "y": 1, "y_name": "ADIOS", "meta": {}}
+{"path": "raw\\01_ADIOS\\sample_20260308_214757_343672.npz", "y": 1, "y_name": "ADIOS", "meta": {}}
+{"path": "raw\\01_ADIOS\\sample_20260308_214800_392643.npz", "y": 1, "y_name": "ADIOS", "meta": {}}
+{"path": "raw\\01_ADIOS\\sample_20260308_214803_442813.npz", "y": 1, "y_name": "ADIOS", "meta": {}}
+{"path": "raw\\01_ADIOS\\sample_20260308_214806_499335.npz", "y": 1, "y_name": "ADIOS", "meta": {}}
+{"path": "raw\\01_ADIOS\\sample_20260308_214809_505177.npz", "y": 1, "y_name": "ADIOS", "meta": {}}
+{"path": "raw\\01_ADIOS\\sample_20260308_214812_548282.npz", "y": 1, "y_name": "ADIOS", "meta": {}}
+{"path": "raw\\01_ADIOS\\sample_20260308_214815_573462.npz", "y": 1, "y_name": "ADIOS", "meta": {}}
+{"path": "raw\\01_ADIOS\\sample_20260308_214818_695441.npz", "y": 1, "y_name": "ADIOS", "meta": {}}
+{"path": "raw\\01_ADIOS\\sample_20260308_214821_715565.npz", "y": 1, "y_name": "ADIOS", "meta": {}}
+{"path": "raw\\01_ADIOS\\sample_20260308_214824_753085.npz", "y": 1, "y_name": "ADIOS", "meta": {}}
+{"path": "raw\\01_ADIOS\\sample_20260308_214827_826391.npz", "y": 1, "y_name": "ADIOS", "meta": {}}
+{"path": "raw\\01_ADIOS\\sample_20260308_214830_895771.npz", "y": 1, "y_name": "ADIOS", "meta": {}}
+{"path": "raw\\01_ADIOS\\sample_20260308_214833_920105.npz", "y": 1, "y_name": "ADIOS", "meta": {}}
+{"path": "raw\\01_ADIOS\\sample_20260308_214837_017966.npz", "y": 1, "y_name": "ADIOS", "meta": {}}
+{"path": "raw\\01_ADIOS\\sample_20260308_214840_025604.npz", "y": 1, "y_name": "ADIOS", "meta": {}}
+{"path": "raw\\01_ADIOS\\sample_20260308_214843_043043.npz", "y": 1, "y_name": "ADIOS", "meta": {}}
+{"path": "raw\\01_ADIOS\\sample_20260308_214846_096646.npz", "y": 1, "y_name": "ADIOS", "meta": {}}
+{"path": "raw\\01_ADIOS\\sample_20260308_214849_172484.npz", "y": 1, "y_name": "ADIOS", "meta": {}}
+{"path": "raw\\01_ADIOS\\sample_20260308_214852_275077.npz", "y": 1, "y_name": "ADIOS", "meta": {}}
+{"path": "raw\\01_ADIOS\\sample_20260308_214855_369694.npz", "y": 1, "y_name": "ADIOS", "meta": {}}
+{"path": "raw\\01_ADIOS\\sample_20260308_214858_390217.npz", "y": 1, "y_name": "ADIOS", "meta": {}}
+{"path": "raw\\01_ADIOS\\sample_20260308_214901_422278.npz", "y": 1, "y_name": "ADIOS", "meta": {}}
+{"path": "raw\\01_ADIOS\\sample_20260308_214904_439427.npz", "y": 1, "y_name": "ADIOS", "meta": {}}
+{"path": "raw\\01_ADIOS\\sample_20260308_214907_467373.npz", "y": 1, "y_name": "ADIOS", "meta": {}}
+{"path": "raw\\01_ADIOS\\sample_20260308_214910_538261.npz", "y": 1, "y_name": "ADIOS", "meta": {}}
+{"path": "raw\\01_ADIOS\\sample_20260308_214913_634112.npz", "y": 1, "y_name": "ADIOS", "meta": {}}
+{"path": "raw\\01_ADIOS\\sample_20260308_214916_699396.npz", "y": 1, "y_name": "ADIOS", "meta": {}}
+{"path": "raw\\01_ADIOS\\sample_20260308_214919_748348.npz", "y": 1, "y_name": "ADIOS", "meta": {}}
+{"path": "raw\\01_ADIOS\\sample_20260308_214922_807400.npz", "y": 1, "y_name": "ADIOS", "meta": {}}
+{"path": "raw\\01_ADIOS\\sample_20260308_214925_853135.npz", "y": 1, "y_name": "ADIOS", "meta": {}}
+{"path": "raw\\01_ADIOS\\sample_20260308_214928_944752.npz", "y": 1, "y_name": "ADIOS", "meta": {}}
+{"path": "raw\\01_ADIOS\\sample_20260308_214932_052906.npz", "y": 1, "y_name": "ADIOS", "meta": {}}
+{"path": "raw\\01_ADIOS\\sample_20260308_214935_105069.npz", "y": 1, "y_name": "ADIOS", "meta": {}}
+{"path": "raw\\01_ADIOS\\sample_20260308_214938_214835.npz", "y": 1, "y_name": "ADIOS", "meta": {}}
+{"path": "raw\\01_ADIOS\\sample_20260308_214941_230324.npz", "y": 1, "y_name": "ADIOS", "meta": {}}
+{"path": "raw\\01_ADIOS\\sample_20260308_214944_296567.npz", "y": 1, "y_name": "ADIOS", "meta": {}}
+{"path": "raw\\01_ADIOS\\sample_20260308_214947_365755.npz", "y": 1, "y_name": "ADIOS", "meta": {}}
+{"path": "raw\\01_ADIOS\\sample_20260308_214950_415740.npz", "y": 1, "y_name": "ADIOS", "meta": {}}
+{"path": "raw\\01_ADIOS\\sample_20260308_214953_433426.npz", "y": 1, "y_name": "ADIOS", "meta": {}}
+{"path": "raw\\01_ADIOS\\sample_20260308_215033_632896.npz", "y": 1, "y_name": "ADIOS", "meta": {}}
+{"path": "raw\\02_BUENOS_DIAS\\sample_20260308_220721_181090.npz", "y": 2, "y_name": "BUENOS_DIAS", "meta": {}}
+{"path": "raw\\02_BUENOS_DIAS\\sample_20260308_220724_273290.npz", "y": 2, "y_name": "BUENOS_DIAS", "meta": {}}
+{"path": "raw\\02_BUENOS_DIAS\\sample_20260308_220727_327694.npz", "y": 2, "y_name": "BUENOS_DIAS", "meta": {}}
+{"path": "raw\\02_BUENOS_DIAS\\sample_20260308_220730_383362.npz", "y": 2, "y_name": "BUENOS_DIAS", "meta": {}}
+{"path": "raw\\02_BUENOS_DIAS\\sample_20260308_220733_481530.npz", "y": 2, "y_name": "BUENOS_DIAS", "meta": {}}
+{"path": "raw\\02_BUENOS_DIAS\\sample_20260308_220736_541830.npz", "y": 2, "y_name": "BUENOS_DIAS", "meta": {}}
+{"path": "raw\\02_BUENOS_DIAS\\sample_20260308_220739_568844.npz", "y": 2, "y_name": "BUENOS_DIAS", "meta": {}}
+{"path": "raw\\02_BUENOS_DIAS\\sample_20260308_220742_655775.npz", "y": 2, "y_name": "BUENOS_DIAS", "meta": {}}
+{"path": "raw\\02_BUENOS_DIAS\\sample_20260308_220745_704263.npz", "y": 2, "y_name": "BUENOS_DIAS", "meta": {}}
+{"path": "raw\\02_BUENOS_DIAS\\sample_20260308_220748_761273.npz", "y": 2, "y_name": "BUENOS_DIAS", "meta": {}}
+{"path": "raw\\02_BUENOS_DIAS\\sample_20260308_220751_861459.npz", "y": 2, "y_name": "BUENOS_DIAS", "meta": {}}
+{"path": "raw\\02_BUENOS_DIAS\\sample_20260308_220754_907333.npz", "y": 2, "y_name": "BUENOS_DIAS", "meta": {}}
+{"path": "raw\\02_BUENOS_DIAS\\sample_20260308_220757_999560.npz", "y": 2, "y_name": "BUENOS_DIAS", "meta": {}}
+{"path": "raw\\02_BUENOS_DIAS\\sample_20260308_220801_025302.npz", "y": 2, "y_name": "BUENOS_DIAS", "meta": {}}
+{"path": "raw\\02_BUENOS_DIAS\\sample_20260308_220804_108888.npz", "y": 2, "y_name": "BUENOS_DIAS", "meta": {}}
+{"path": "raw\\02_BUENOS_DIAS\\sample_20260308_220807_167927.npz", "y": 2, "y_name": "BUENOS_DIAS", "meta": {}}
+{"path": "raw\\02_BUENOS_DIAS\\sample_20260308_220810_222323.npz", "y": 2, "y_name": "BUENOS_DIAS", "meta": {}}
+{"path": "raw\\02_BUENOS_DIAS\\sample_20260308_220813_275578.npz", "y": 2, "y_name": "BUENOS_DIAS", "meta": {}}
+{"path": "raw\\02_BUENOS_DIAS\\sample_20260308_220816_321382.npz", "y": 2, "y_name": "BUENOS_DIAS", "meta": {}}
+{"path": "raw\\02_BUENOS_DIAS\\sample_20260308_220819_434219.npz", "y": 2, "y_name": "BUENOS_DIAS", "meta": {}}
+{"path": "raw\\02_BUENOS_DIAS\\sample_20260308_220822_479508.npz", "y": 2, "y_name": "BUENOS_DIAS", "meta": {}}
+{"path": "raw\\02_BUENOS_DIAS\\sample_20260308_220825_532682.npz", "y": 2, "y_name": "BUENOS_DIAS", "meta": {}}
+{"path": "raw\\02_BUENOS_DIAS\\sample_20260308_220828_569277.npz", "y": 2, "y_name": "BUENOS_DIAS", "meta": {}}
+{"path": "raw\\02_BUENOS_DIAS\\sample_20260308_220831_584546.npz", "y": 2, "y_name": "BUENOS_DIAS", "meta": {}}
+{"path": "raw\\02_BUENOS_DIAS\\sample_20260308_220834_650134.npz", "y": 2, "y_name": "BUENOS_DIAS", "meta": {}}
+{"path": "raw\\02_BUENOS_DIAS\\sample_20260308_220837_733923.npz", "y": 2, "y_name": "BUENOS_DIAS", "meta": {}}
+{"path": "raw\\02_BUENOS_DIAS\\sample_20260308_220840_769615.npz", "y": 2, "y_name": "BUENOS_DIAS", "meta": {}}
+{"path": "raw\\02_BUENOS_DIAS\\sample_20260308_220843_808464.npz", "y": 2, "y_name": "BUENOS_DIAS", "meta": {}}
+{"path": "raw\\02_BUENOS_DIAS\\sample_20260308_220846_889803.npz", "y": 2, "y_name": "BUENOS_DIAS", "meta": {}}
+{"path": "raw\\02_BUENOS_DIAS\\sample_20260308_220849_936580.npz", "y": 2, "y_name": "BUENOS_DIAS", "meta": {}}
+{"path": "raw\\02_BUENOS_DIAS\\sample_20260308_220853_018019.npz", "y": 2, "y_name": "BUENOS_DIAS", "meta": {}}
+{"path": "raw\\02_BUENOS_DIAS\\sample_20260308_220856_025237.npz", "y": 2, "y_name": "BUENOS_DIAS", "meta": {}}
+{"path": "raw\\02_BUENOS_DIAS\\sample_20260308_220859_088113.npz", "y": 2, "y_name": "BUENOS_DIAS", "meta": {}}
+{"path": "raw\\02_BUENOS_DIAS\\sample_20260308_220902_136784.npz", "y": 2, "y_name": "BUENOS_DIAS", "meta": {}}
+{"path": "raw\\02_BUENOS_DIAS\\sample_20260308_220905_187450.npz", "y": 2, "y_name": "BUENOS_DIAS", "meta": {}}
+{"path": "raw\\02_BUENOS_DIAS\\sample_20260308_220908_197940.npz", "y": 2, "y_name": "BUENOS_DIAS", "meta": {}}
+{"path": "raw\\02_BUENOS_DIAS\\sample_20260308_220911_236900.npz", "y": 2, "y_name": "BUENOS_DIAS", "meta": {}}
+{"path": "raw\\02_BUENOS_DIAS\\sample_20260308_220914_303640.npz", "y": 2, "y_name": "BUENOS_DIAS", "meta": {}}
+{"path": "raw\\02_BUENOS_DIAS\\sample_20260308_220917_348207.npz", "y": 2, "y_name": "BUENOS_DIAS", "meta": {}}
+{"path": "raw\\02_BUENOS_DIAS\\sample_20260308_220920_404298.npz", "y": 2, "y_name": "BUENOS_DIAS", "meta": {}}
+{"path": "raw\\02_BUENOS_DIAS\\sample_20260308_220923_445461.npz", "y": 2, "y_name": "BUENOS_DIAS", "meta": {}}
+{"path": "raw\\02_BUENOS_DIAS\\sample_20260308_220926_512405.npz", "y": 2, "y_name": "BUENOS_DIAS", "meta": {}}
+{"path": "raw\\02_BUENOS_DIAS\\sample_20260308_220929_552844.npz", "y": 2, "y_name": "BUENOS_DIAS", "meta": {}}
+{"path": "raw\\02_BUENOS_DIAS\\sample_20260308_220932_618981.npz", "y": 2, "y_name": "BUENOS_DIAS", "meta": {}}
+{"path": "raw\\02_BUENOS_DIAS\\sample_20260308_220935_708616.npz", "y": 2, "y_name": "BUENOS_DIAS", "meta": {}}
+{"path": "raw\\02_BUENOS_DIAS\\sample_20260308_220938_811782.npz", "y": 2, "y_name": "BUENOS_DIAS", "meta": {}}
+{"path": "raw\\02_BUENOS_DIAS\\sample_20260308_220941_888300.npz", "y": 2, "y_name": "BUENOS_DIAS", "meta": {}}
+{"path": "raw\\02_BUENOS_DIAS\\sample_20260308_220944_942433.npz", "y": 2, "y_name": "BUENOS_DIAS", "meta": {}}
+{"path": "raw\\02_BUENOS_DIAS\\sample_20260308_220947_992404.npz", "y": 2, "y_name": "BUENOS_DIAS", "meta": {}}
+{"path": "raw\\02_BUENOS_DIAS\\sample_20260308_220951_026270.npz", "y": 2, "y_name": "BUENOS_DIAS", "meta": {}}
+{"path": "raw\\03_GRACIAS\\sample_20260308_222100_191177.npz", "y": 3, "y_name": "GRACIAS", "meta": {}}
+{"path": "raw\\03_GRACIAS\\sample_20260308_222103_258464.npz", "y": 3, "y_name": "GRACIAS", "meta": {}}
+{"path": "raw\\03_GRACIAS\\sample_20260308_222106_336195.npz", "y": 3, "y_name": "GRACIAS", "meta": {}}
+{"path": "raw\\03_GRACIAS\\sample_20260308_222109_368100.npz", "y": 3, "y_name": "GRACIAS", "meta": {}}
+{"path": "raw\\03_GRACIAS\\sample_20260308_222112_441685.npz", "y": 3, "y_name": "GRACIAS", "meta": {}}
+{"path": "raw\\03_GRACIAS\\sample_20260308_222115_475175.npz", "y": 3, "y_name": "GRACIAS", "meta": {}}
+{"path": "raw\\03_GRACIAS\\sample_20260308_222118_511936.npz", "y": 3, "y_name": "GRACIAS", "meta": {}}
+{"path": "raw\\03_GRACIAS\\sample_20260308_222121_600787.npz", "y": 3, "y_name": "GRACIAS", "meta": {}}
+{"path": "raw\\03_GRACIAS\\sample_20260308_222124_636884.npz", "y": 3, "y_name": "GRACIAS", "meta": {}}
+{"path": "raw\\03_GRACIAS\\sample_20260308_222127_696303.npz", "y": 3, "y_name": "GRACIAS", "meta": {}}
+{"path": "raw\\03_GRACIAS\\sample_20260308_222130_747117.npz", "y": 3, "y_name": "GRACIAS", "meta": {}}
+{"path": "raw\\03_GRACIAS\\sample_20260308_222133_814293.npz", "y": 3, "y_name": "GRACIAS", "meta": {}}
+{"path": "raw\\03_GRACIAS\\sample_20260308_222136_859477.npz", "y": 3, "y_name": "GRACIAS", "meta": {}}
+{"path": "raw\\03_GRACIAS\\sample_20260308_222139_889946.npz", "y": 3, "y_name": "GRACIAS", "meta": {}}
+{"path": "raw\\03_GRACIAS\\sample_20260308_222142_934647.npz", "y": 3, "y_name": "GRACIAS", "meta": {}}
+{"path": "raw\\03_GRACIAS\\sample_20260308_222145_992607.npz", "y": 3, "y_name": "GRACIAS", "meta": {}}
+{"path": "raw\\03_GRACIAS\\sample_20260308_222149_059710.npz", "y": 3, "y_name": "GRACIAS", "meta": {}}
+{"path": "raw\\03_GRACIAS\\sample_20260308_222152_109090.npz", "y": 3, "y_name": "GRACIAS", "meta": {}}
+{"path": "raw\\03_GRACIAS\\sample_20260308_222155_150958.npz", "y": 3, "y_name": "GRACIAS", "meta": {}}
+{"path": "raw\\03_GRACIAS\\sample_20260308_222158_212780.npz", "y": 3, "y_name": "GRACIAS", "meta": {}}
+{"path": "raw\\03_GRACIAS\\sample_20260308_222201_247706.npz", "y": 3, "y_name": "GRACIAS", "meta": {}}
+{"path": "raw\\03_GRACIAS\\sample_20260308_222204_279797.npz", "y": 3, "y_name": "GRACIAS", "meta": {}}
+{"path": "raw\\03_GRACIAS\\sample_20260308_222207_344529.npz", "y": 3, "y_name": "GRACIAS", "meta": {}}
+{"path": "raw\\03_GRACIAS\\sample_20260308_222210_430851.npz", "y": 3, "y_name": "GRACIAS", "meta": {}}
+{"path": "raw\\03_GRACIAS\\sample_20260308_222213_466429.npz", "y": 3, "y_name": "GRACIAS", "meta": {}}
+{"path": "raw\\03_GRACIAS\\sample_20260308_222216_541286.npz", "y": 3, "y_name": "GRACIAS", "meta": {}}
+{"path": "raw\\03_GRACIAS\\sample_20260308_222219_568701.npz", "y": 3, "y_name": "GRACIAS", "meta": {}}
+{"path": "raw\\03_GRACIAS\\sample_20260308_222222_595687.npz", "y": 3, "y_name": "GRACIAS", "meta": {}}
+{"path": "raw\\03_GRACIAS\\sample_20260308_222225_688865.npz", "y": 3, "y_name": "GRACIAS", "meta": {}}
+{"path": "raw\\03_GRACIAS\\sample_20260308_222228_735698.npz", "y": 3, "y_name": "GRACIAS", "meta": {}}
+{"path": "raw\\03_GRACIAS\\sample_20260308_222231_791516.npz", "y": 3, "y_name": "GRACIAS", "meta": {}}
+{"path": "raw\\03_GRACIAS\\sample_20260308_222234_816550.npz", "y": 3, "y_name": "GRACIAS", "meta": {}}
+{"path": "raw\\03_GRACIAS\\sample_20260308_222237_861648.npz", "y": 3, "y_name": "GRACIAS", "meta": {}}
+{"path": "raw\\03_GRACIAS\\sample_20260308_222240_928272.npz", "y": 3, "y_name": "GRACIAS", "meta": {}}
+{"path": "raw\\03_GRACIAS\\sample_20260308_222243_976968.npz", "y": 3, "y_name": "GRACIAS", "meta": {}}
+{"path": "raw\\03_GRACIAS\\sample_20260308_222247_019696.npz", "y": 3, "y_name": "GRACIAS", "meta": {}}
+{"path": "raw\\03_GRACIAS\\sample_20260308_222250_091026.npz", "y": 3, "y_name": "GRACIAS", "meta": {}}
+{"path": "raw\\03_GRACIAS\\sample_20260308_222253_130324.npz", "y": 3, "y_name": "GRACIAS", "meta": {}}
+{"path": "raw\\03_GRACIAS\\sample_20260308_222256_178717.npz", "y": 3, "y_name": "GRACIAS", "meta": {}}
+{"path": "raw\\03_GRACIAS\\sample_20260308_222259_241336.npz", "y": 3, "y_name": "GRACIAS", "meta": {}}
+{"path": "raw\\03_GRACIAS\\sample_20260308_222302_293023.npz", "y": 3, "y_name": "GRACIAS", "meta": {}}
+{"path": "raw\\03_GRACIAS\\sample_20260308_222305_366171.npz", "y": 3, "y_name": "GRACIAS", "meta": {}}
+{"path": "raw\\03_GRACIAS\\sample_20260308_222308_437876.npz", "y": 3, "y_name": "GRACIAS", "meta": {}}
+{"path": "raw\\03_GRACIAS\\sample_20260308_222311_515151.npz", "y": 3, "y_name": "GRACIAS", "meta": {}}
+{"path": "raw\\03_GRACIAS\\sample_20260308_222314_536643.npz", "y": 3, "y_name": "GRACIAS", "meta": {}}
+{"path": "raw\\03_GRACIAS\\sample_20260308_222317_584123.npz", "y": 3, "y_name": "GRACIAS", "meta": {}}
+{"path": "raw\\03_GRACIAS\\sample_20260308_222320_598292.npz", "y": 3, "y_name": "GRACIAS", "meta": {}}
+{"path": "raw\\03_GRACIAS\\sample_20260308_222323_611612.npz", "y": 3, "y_name": "GRACIAS", "meta": {}}
+{"path": "raw\\03_GRACIAS\\sample_20260308_222326_651925.npz", "y": 3, "y_name": "GRACIAS", "meta": {}}
+{"path": "raw\\03_GRACIAS\\sample_20260308_222329_716021.npz", "y": 3, "y_name": "GRACIAS", "meta": {}}
+{"path": "raw\\04_POR_FAVOR\\sample_20260308_223405_647671.npz", "y": 4, "y_name": "POR_FAVOR", "meta": {}}
+{"path": "raw\\04_POR_FAVOR\\sample_20260308_223408_750459.npz", "y": 4, "y_name": "POR_FAVOR", "meta": {}}
+{"path": "raw\\04_POR_FAVOR\\sample_20260308_223411_759863.npz", "y": 4, "y_name": "POR_FAVOR", "meta": {}}
+{"path": "raw\\04_POR_FAVOR\\sample_20260308_223414_904255.npz", "y": 4, "y_name": "POR_FAVOR", "meta": {}}
+{"path": "raw\\04_POR_FAVOR\\sample_20260308_223417_976123.npz", "y": 4, "y_name": "POR_FAVOR", "meta": {}}
+{"path": "raw\\04_POR_FAVOR\\sample_20260308_223420_967860.npz", "y": 4, "y_name": "POR_FAVOR", "meta": {}}
+{"path": "raw\\04_POR_FAVOR\\sample_20260308_223424_065412.npz", "y": 4, "y_name": "POR_FAVOR", "meta": {}}
+{"path": "raw\\04_POR_FAVOR\\sample_20260308_223427_166284.npz", "y": 4, "y_name": "POR_FAVOR", "meta": {}}
+{"path": "raw\\04_POR_FAVOR\\sample_20260308_223430_248494.npz", "y": 4, "y_name": "POR_FAVOR", "meta": {}}
+{"path": "raw\\04_POR_FAVOR\\sample_20260308_223433_320811.npz", "y": 4, "y_name": "POR_FAVOR", "meta": {}}
+{"path": "raw\\04_POR_FAVOR\\sample_20260308_223436_338985.npz", "y": 4, "y_name": "POR_FAVOR", "meta": {}}
+{"path": "raw\\04_POR_FAVOR\\sample_20260308_223439_397086.npz", "y": 4, "y_name": "POR_FAVOR", "meta": {}}
+{"path": "raw\\04_POR_FAVOR\\sample_20260308_223442_449259.npz", "y": 4, "y_name": "POR_FAVOR", "meta": {}}
+{"path": "raw\\04_POR_FAVOR\\sample_20260308_223445_491545.npz", "y": 4, "y_name": "POR_FAVOR", "meta": {}}
+{"path": "raw\\04_POR_FAVOR\\sample_20260308_223448_565792.npz", "y": 4, "y_name": "POR_FAVOR", "meta": {}}
+{"path": "raw\\04_POR_FAVOR\\sample_20260308_223451_654036.npz", "y": 4, "y_name": "POR_FAVOR", "meta": {}}
+{"path": "raw\\04_POR_FAVOR\\sample_20260308_223454_712833.npz", "y": 4, "y_name": "POR_FAVOR", "meta": {}}
+{"path": "raw\\04_POR_FAVOR\\sample_20260308_223457_816997.npz", "y": 4, "y_name": "POR_FAVOR", "meta": {}}
+{"path": "raw\\04_POR_FAVOR\\sample_20260308_223500_887357.npz", "y": 4, "y_name": "POR_FAVOR", "meta": {}}
+{"path": "raw\\04_POR_FAVOR\\sample_20260308_223503_972733.npz", "y": 4, "y_name": "POR_FAVOR", "meta": {}}
+{"path": "raw\\04_POR_FAVOR\\sample_20260308_223507_051906.npz", "y": 4, "y_name": "POR_FAVOR", "meta": {}}
+{"path": "raw\\04_POR_FAVOR\\sample_20260308_223510_094726.npz", "y": 4, "y_name": "POR_FAVOR", "meta": {}}
+{"path": "raw\\04_POR_FAVOR\\sample_20260308_223513_151217.npz", "y": 4, "y_name": "POR_FAVOR", "meta": {}}
+{"path": "raw\\04_POR_FAVOR\\sample_20260308_223516_187710.npz", "y": 4, "y_name": "POR_FAVOR", "meta": {}}
+{"path": "raw\\04_POR_FAVOR\\sample_20260308_223519_251032.npz", "y": 4, "y_name": "POR_FAVOR", "meta": {}}
+{"path": "raw\\04_POR_FAVOR\\sample_20260308_223522_316745.npz", "y": 4, "y_name": "POR_FAVOR", "meta": {}}
+{"path": "raw\\04_POR_FAVOR\\sample_20260308_223525_356035.npz", "y": 4, "y_name": "POR_FAVOR", "meta": {}}
+{"path": "raw\\04_POR_FAVOR\\sample_20260308_223528_358595.npz", "y": 4, "y_name": "POR_FAVOR", "meta": {}}
+{"path": "raw\\04_POR_FAVOR\\sample_20260308_223531_443839.npz", "y": 4, "y_name": "POR_FAVOR", "meta": {}}
+{"path": "raw\\04_POR_FAVOR\\sample_20260308_223534_462243.npz", "y": 4, "y_name": "POR_FAVOR", "meta": {}}
+{"path": "raw\\04_POR_FAVOR\\sample_20260308_223537_524256.npz", "y": 4, "y_name": "POR_FAVOR", "meta": {}}
+{"path": "raw\\04_POR_FAVOR\\sample_20260308_223540_588649.npz", "y": 4, "y_name": "POR_FAVOR", "meta": {}}
+{"path": "raw\\04_POR_FAVOR\\sample_20260308_223543_651118.npz", "y": 4, "y_name": "POR_FAVOR", "meta": {}}
+{"path": "raw\\04_POR_FAVOR\\sample_20260308_223546_639270.npz", "y": 4, "y_name": "POR_FAVOR", "meta": {}}
+{"path": "raw\\04_POR_FAVOR\\sample_20260308_223549_750992.npz", "y": 4, "y_name": "POR_FAVOR", "meta": {}}
+{"path": "raw\\04_POR_FAVOR\\sample_20260308_223552_915989.npz", "y": 4, "y_name": "POR_FAVOR", "meta": {}}
+{"path": "raw\\04_POR_FAVOR\\sample_20260308_223555_922594.npz", "y": 4, "y_name": "POR_FAVOR", "meta": {}}
+{"path": "raw\\04_POR_FAVOR\\sample_20260308_223558_977141.npz", "y": 4, "y_name": "POR_FAVOR", "meta": {}}
+{"path": "raw\\04_POR_FAVOR\\sample_20260308_223602_038503.npz", "y": 4, "y_name": "POR_FAVOR", "meta": {}}
+{"path": "raw\\04_POR_FAVOR\\sample_20260308_223605_115682.npz", "y": 4, "y_name": "POR_FAVOR", "meta": {}}
+{"path": "raw\\04_POR_FAVOR\\sample_20260308_223608_221888.npz", "y": 4, "y_name": "POR_FAVOR", "meta": {}}
+{"path": "raw\\04_POR_FAVOR\\sample_20260308_223611_271822.npz", "y": 4, "y_name": "POR_FAVOR", "meta": {}}
+{"path": "raw\\04_POR_FAVOR\\sample_20260308_223614_321238.npz", "y": 4, "y_name": "POR_FAVOR", "meta": {}}
+{"path": "raw\\04_POR_FAVOR\\sample_20260308_223617_358806.npz", "y": 4, "y_name": "POR_FAVOR", "meta": {}}
+{"path": "raw\\04_POR_FAVOR\\sample_20260308_223620_425331.npz", "y": 4, "y_name": "POR_FAVOR", "meta": {}}
+{"path": "raw\\04_POR_FAVOR\\sample_20260308_223623_510262.npz", "y": 4, "y_name": "POR_FAVOR", "meta": {}}
+{"path": "raw\\04_POR_FAVOR\\sample_20260308_223626_587053.npz", "y": 4, "y_name": "POR_FAVOR", "meta": {}}
+{"path": "raw\\04_POR_FAVOR\\sample_20260308_223641_636891.npz", "y": 4, "y_name": "POR_FAVOR", "meta": {}}
+{"path": "raw\\04_POR_FAVOR\\sample_20260308_223644_743325.npz", "y": 4, "y_name": "POR_FAVOR", "meta": {}}
+{"path": "raw\\04_POR_FAVOR\\sample_20260308_223647_749082.npz", "y": 4, "y_name": "POR_FAVOR", "meta": {}}
+{"path": "raw\\05_NONE\\sample_20260308_224312_941050.npz", "y": 5, "y_name": "NONE", "meta": {}}
+{"path": "raw\\05_NONE\\sample_20260308_224316_009427.npz", "y": 5, "y_name": "NONE", "meta": {}}
+{"path": "raw\\05_NONE\\sample_20260308_224319_063372.npz", "y": 5, "y_name": "NONE", "meta": {}}
+{"path": "raw\\05_NONE\\sample_20260308_224322_059043.npz", "y": 5, "y_name": "NONE", "meta": {}}
+{"path": "raw\\05_NONE\\sample_20260308_224325_111721.npz", "y": 5, "y_name": "NONE", "meta": {}}
+{"path": "raw\\05_NONE\\sample_20260308_224328_146377.npz", "y": 5, "y_name": "NONE", "meta": {}}
+{"path": "raw\\05_NONE\\sample_20260308_224331_217296.npz", "y": 5, "y_name": "NONE", "meta": {}}
+{"path": "raw\\05_NONE\\sample_20260308_224334_270891.npz", "y": 5, "y_name": "NONE", "meta": {}}
+{"path": "raw\\05_NONE\\sample_20260308_224337_336495.npz", "y": 5, "y_name": "NONE", "meta": {}}
+{"path": "raw\\05_NONE\\sample_20260308_224340_349400.npz", "y": 5, "y_name": "NONE", "meta": {}}
+{"path": "raw\\05_NONE\\sample_20260308_224343_411936.npz", "y": 5, "y_name": "NONE", "meta": {}}
+{"path": "raw\\05_NONE\\sample_20260308_224346_469473.npz", "y": 5, "y_name": "NONE", "meta": {}}
+{"path": "raw\\05_NONE\\sample_20260308_224349_501498.npz", "y": 5, "y_name": "NONE", "meta": {}}
+{"path": "raw\\05_NONE\\sample_20260308_224352_605665.npz", "y": 5, "y_name": "NONE", "meta": {}}
+{"path": "raw\\05_NONE\\sample_20260308_224355_660307.npz", "y": 5, "y_name": "NONE", "meta": {}}
+{"path": "raw\\05_NONE\\sample_20260308_224358_702326.npz", "y": 5, "y_name": "NONE", "meta": {}}
+{"path": "raw\\05_NONE\\sample_20260308_224401_705201.npz", "y": 5, "y_name": "NONE", "meta": {}}
+{"path": "raw\\05_NONE\\sample_20260308_224404_759700.npz", "y": 5, "y_name": "NONE", "meta": {}}
+{"path": "raw\\05_NONE\\sample_20260308_224407_800320.npz", "y": 5, "y_name": "NONE", "meta": {}}
+{"path": "raw\\05_NONE\\sample_20260308_224410_900325.npz", "y": 5, "y_name": "NONE", "meta": {}}
+{"path": "raw\\05_NONE\\sample_20260308_224413_888775.npz", "y": 5, "y_name": "NONE", "meta": {}}
+{"path": "raw\\05_NONE\\sample_20260308_224416_907270.npz", "y": 5, "y_name": "NONE", "meta": {}}
+{"path": "raw\\05_NONE\\sample_20260308_224419_942648.npz", "y": 5, "y_name": "NONE", "meta": {}}
+{"path": "raw\\05_NONE\\sample_20260308_224423_004148.npz", "y": 5, "y_name": "NONE", "meta": {}}
+{"path": "raw\\05_NONE\\sample_20260308_224426_025830.npz", "y": 5, "y_name": "NONE", "meta": {}}
+{"path": "raw\\05_NONE\\sample_20260308_224429_076922.npz", "y": 5, "y_name": "NONE", "meta": {}}
+{"path": "raw\\05_NONE\\sample_20260308_224432_103646.npz", "y": 5, "y_name": "NONE", "meta": {}}
+{"path": "raw\\05_NONE\\sample_20260308_224435_128456.npz", "y": 5, "y_name": "NONE", "meta": {}}
+{"path": "raw\\05_NONE\\sample_20260308_224438_138151.npz", "y": 5, "y_name": "NONE", "meta": {}}
+{"path": "raw\\05_NONE\\sample_20260308_224441_154910.npz", "y": 5, "y_name": "NONE", "meta": {}}
+{"path": "raw\\05_NONE\\sample_20260308_224444_201774.npz", "y": 5, "y_name": "NONE", "meta": {}}
+{"path": "raw\\05_NONE\\sample_20260308_224447_256862.npz", "y": 5, "y_name": "NONE", "meta": {}}
+{"path": "raw\\05_NONE\\sample_20260308_224450_307736.npz", "y": 5, "y_name": "NONE", "meta": {}}
+{"path": "raw\\05_NONE\\sample_20260308_224453_345441.npz", "y": 5, "y_name": "NONE", "meta": {}}
+{"path": "raw\\05_NONE\\sample_20260308_224456_447526.npz", "y": 5, "y_name": "NONE", "meta": {}}
+{"path": "raw\\05_NONE\\sample_20260308_224459_569562.npz", "y": 5, "y_name": "NONE", "meta": {}}
+{"path": "raw\\05_NONE\\sample_20260308_224502_622226.npz", "y": 5, "y_name": "NONE", "meta": {}}
+{"path": "raw\\05_NONE\\sample_20260308_224505_657224.npz", "y": 5, "y_name": "NONE", "meta": {}}
+{"path": "raw\\05_NONE\\sample_20260308_224508_737249.npz", "y": 5, "y_name": "NONE", "meta": {}}
+{"path": "raw\\05_NONE\\sample_20260308_224511_806161.npz", "y": 5, "y_name": "NONE", "meta": {}}
+{"path": "raw\\05_NONE\\sample_20260308_224514_855158.npz", "y": 5, "y_name": "NONE", "meta": {}}
+{"path": "raw\\05_NONE\\sample_20260308_224517_935382.npz", "y": 5, "y_name": "NONE", "meta": {}}
+{"path": "raw\\05_NONE\\sample_20260308_224520_961630.npz", "y": 5, "y_name": "NONE", "meta": {}}
+{"path": "raw\\05_NONE\\sample_20260308_224523_979958.npz", "y": 5, "y_name": "NONE", "meta": {}}
+{"path": "raw\\05_NONE\\sample_20260308_224527_062621.npz", "y": 5, "y_name": "NONE", "meta": {}}
+{"path": "raw\\05_NONE\\sample_20260308_224530_177444.npz", "y": 5, "y_name": "NONE", "meta": {}}
+{"path": "raw\\05_NONE\\sample_20260308_224626_618899.npz", "y": 5, "y_name": "NONE", "meta": {}}
+{"path": "raw\\05_NONE\\sample_20260308_224629_649640.npz", "y": 5, "y_name": "NONE", "meta": {}}
+{"path": "raw\\05_NONE\\sample_20260308_224632_741385.npz", "y": 5, "y_name": "NONE", "meta": {}}
+{"path": "raw\\05_NONE\\sample_20260308_224635_862058.npz", "y": 5, "y_name": "NONE", "meta": {}}
+{"path": "raw\\05_NONE\\sample_20260308_224638_860438.npz", "y": 5, "y_name": "NONE", "meta": {}}
+{"path": "raw\\05_NONE\\sample_20260308_224641_870850.npz", "y": 5, "y_name": "NONE", "meta": {}}
+{"path": "raw\\05_NONE\\sample_20260308_224644_965891.npz", "y": 5, "y_name": "NONE", "meta": {}}
+{"path": "raw\\05_NONE\\sample_20260308_224648_017253.npz", "y": 5, "y_name": "NONE", "meta": {}}
+{"path": "raw\\05_NONE\\sample_20260308_224651_142282.npz", "y": 5, "y_name": "NONE", "meta": {}}
+{"path": "raw\\05_NONE\\sample_20260308_224654_242402.npz", "y": 5, "y_name": "NONE", "meta": {}}
+{"path": "raw\\05_NONE\\sample_20260308_224657_365756.npz", "y": 5, "y_name": "NONE", "meta": {}}
+{"path": "raw\\05_NONE\\sample_20260308_224700_422105.npz", "y": 5, "y_name": "NONE", "meta": {}}
+{"path": "raw\\05_NONE\\sample_20260308_224703_501844.npz", "y": 5, "y_name": "NONE", "meta": {}}
+{"path": "raw\\05_NONE\\sample_20260308_224706_487801.npz", "y": 5, "y_name": "NONE", "meta": {}}
+{"path": "raw\\05_NONE\\sample_20260308_224709_553765.npz", "y": 5, "y_name": "NONE", "meta": {}}
+{"path": "raw\\05_NONE\\sample_20260308_224712_622735.npz", "y": 5, "y_name": "NONE", "meta": {}}
+{"path": "raw\\05_NONE\\sample_20260308_224715_713213.npz", "y": 5, "y_name": "NONE", "meta": {}}
+{"path": "raw\\05_NONE\\sample_20260308_224718_798294.npz", "y": 5, "y_name": "NONE", "meta": {}}
+{"path": "raw\\05_NONE\\sample_20260308_224721_803014.npz", "y": 5, "y_name": "NONE", "meta": {}}
+{"path": "raw\\05_NONE\\sample_20260308_224724_882858.npz", "y": 5, "y_name": "NONE", "meta": {}}
+{"path": "raw\\05_NONE\\sample_20260308_224727_920204.npz", "y": 5, "y_name": "NONE", "meta": {}}
+{"path": "raw\\05_NONE\\sample_20260308_224730_962562.npz", "y": 5, "y_name": "NONE", "meta": {}}
+{"path": "raw\\05_NONE\\sample_20260308_224734_032646.npz", "y": 5, "y_name": "NONE", "meta": {}}
+{"path": "raw\\05_NONE\\sample_20260308_224737_117661.npz", "y": 5, "y_name": "NONE", "meta": {}}
+{"path": "raw\\05_NONE\\sample_20260308_224740_123118.npz", "y": 5, "y_name": "NONE", "meta": {}}
+{"path": "raw\\05_NONE\\sample_20260308_224743_219430.npz", "y": 5, "y_name": "NONE", "meta": {}}
+{"path": "raw\\05_NONE\\sample_20260308_224746_263265.npz", "y": 5, "y_name": "NONE", "meta": {}}
+{"path": "raw\\05_NONE\\sample_20260308_224749_313275.npz", "y": 5, "y_name": "NONE", "meta": {}}
+{"path": "raw\\05_NONE\\sample_20260308_224752_404947.npz", "y": 5, "y_name": "NONE", "meta": {}}

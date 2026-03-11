@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import Iterable, Sequence
 
 import tensorflow as tf
-from tensorflow import keras
+import keras
 
 
 def tcn_residual_block(
@@ -41,18 +41,20 @@ def tcn_residual_block(
     if shortcut.shape[-1] != filters:
         shortcut = keras.layers.Conv1D(filters, 1, padding="same", name=f"{name}_proj")(shortcut)
 
-    out = keras.layers.Add(name=f"{name}_add")([shortcut, y])
-    return out
+    return keras.layers.Add(name=f"{name}_add")([shortcut, y])
 
 
 def build_tcn(
     input_shape: Sequence[int],
-    num_classes: int = 21,
+    num_classes: int,
     filters: int = 64,
     kernel_size: int = 3,
     dilations: Iterable[int] = (1, 2, 4, 8),
     dropout: float = 0.2,
 ) -> keras.Model:
+    if num_classes <= 1:
+        raise ValueError(f"num_classes debe ser > 1, recibido: {num_classes}")
+
     inp = keras.Input(shape=input_shape, name="input")
     x = inp
     for i, d in enumerate(dilations):

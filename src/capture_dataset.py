@@ -5,29 +5,27 @@ import json
 import re
 import string
 import time
-from collections import Counter, deque
+from collections import Counter
 from datetime import datetime
 from pathlib import Path
-from typing import Dict, List
+from typing import Dict, List, Tuple
 
 import cv2
 import numpy as np
 import yaml
 
 from feature_extractor import HandsFeatureExtractor, TOTAL_FEATURES
+from dataset_utils import compute_timesteps
 
 
 RESERVED_KEYS = {"n", "s", "r", "x", "m", "c", " "}
-
-
-def compute_timesteps(window_seconds: float, target_fps: float) -> int:
-    return int(round(window_seconds * target_fps))
 
 
 def ensure_gestures_yaml(path: Path) -> Dict:
     if path.exists():
         with path.open("r", encoding="utf-8") as f:
             return yaml.safe_load(f)
+
     names = [f"gesture_{i:02d}" for i in range(1, 21)] + ["NONE"]
     obj = {
         "id_to_name": {i: n for i, n in enumerate(names)},
@@ -58,14 +56,22 @@ def safe_class_dirname(y_id: int, y_name: str) -> str:
 def draw_overlay(frame: np.ndarray, lines: List[str]) -> None:
     y = 24
     for line in lines:
-        cv2.putText(frame, line, (10, y), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (30, 255, 30), 2, cv2.LINE_AA)
+        cv2.putText(
+            frame,
+            line,
+            (10, y),
+            cv2.FONT_HERSHEY_SIMPLEX,
+            0.6,
+            (30, 255, 30),
+            2,
+            cv2.LINE_AA,
+        )
         y += 24
 
 
 def draw_big_text_center(frame: np.ndarray, text: str, font_scale: float = 5.0) -> None:
     font = cv2.FONT_HERSHEY_SIMPLEX
     thickness = max(2, int(round(font_scale * 2)))
-
     (tw, th), _ = cv2.getTextSize(text, font, font_scale, thickness)
     h, w = frame.shape[:2]
     x = (w - tw) // 2
@@ -76,14 +82,10 @@ def draw_big_text_center(frame: np.ndarray, text: str, font_scale: float = 5.0) 
 
 
 def draw_text_top_center(frame: np.ndarray, text: str, y: int, font_scale: float) -> None:
-    """
-    Texto centrado arriba con sombra, tamaño configurable.
-    """
     font = cv2.FONT_HERSHEY_SIMPLEX
     thickness = max(1, int(round(font_scale * 2)))
-
     (tw, th), _ = cv2.getTextSize(text, font, font_scale, thickness)
-    h, w = frame.shape[:2]
+    _, w = frame.shape[:2]
     x = (w - tw) // 2
 
     cv2.putText(frame, text, (x + 3, y + 3), font, font_scale, (0, 0, 0), thickness + 1, cv2.LINE_AA)
@@ -91,14 +93,10 @@ def draw_text_top_center(frame: np.ndarray, text: str, y: int, font_scale: float
 
 
 def draw_rec_bottom_right(frame: np.ndarray) -> None:
-    """
-    REC pequeño en esquina inferior derecha.
-    """
     text = "REC"
     font = cv2.FONT_HERSHEY_SIMPLEX
     font_scale = 0.8
     thickness = 2
-
     (tw, th), _ = cv2.getTextSize(text, font, font_scale, thickness)
     h, w = frame.shape[:2]
     x = w - tw - 20
@@ -122,6 +120,7 @@ def save_sample(
     ts = datetime.now().strftime("%Y%m%d_%H%M%S_%f")
     file_name = f"sample_{ts}.npz"
     out_path = class_dir / file_name
+
     np.savez_compressed(
         out_path,
         X=x_seq.astype(np.float32),
@@ -142,6 +141,37 @@ def save_sample(
     return out_path
 
 
+def resample_sequence_nearest(
+    features: List[np.ndarray],
+    timestamps: List[float],
+    target_fps: float,
+    total_steps: int,
+) -> np.ndarray:
+    if total_steps <= 0:
+        raise ValueError("total_steps debe ser > 0")
+
+    if not features:
+        return np.zeros((total_steps, TOTAL_FEATURES), dtype=np.float32)
+
+    feats = np.stack(features, axis=0).astype(np.float32)
+    ts = np.asarray(timestamps, dtype=np.float32)
+    sample_times = (np.arange(total_steps, dtype=np.float32) / float(target_fps)).astype(np.float32)
+
+    right_idx = np.searchsorted(ts, sample_times, side="left")
+    right_idx = np.clip(right_idx, 0, len(ts) - 1)
+    left_idx = np.clip(right_idx - 1, 0, len(ts) - 1)
+
+    left_dist = np.abs(sample_times - ts[left_idx])
+    right_dist = np.abs(ts[right_idx] - sample_times)
+    choose_right = right_dist < left_dist
+    final_idx = np.where(choose_right, right_idx, left_idx)
+    return feats[final_idx]
+
+
+def start_recording(now: float) -> Tuple[str, float, List[np.ndarray], List[float]]:
+    return "RECORDING", now, [], []
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="Captura dataset LSE aislado (MediaPipe Hands)")
     parser.add_argument("--data_dir", type=str, default="data")
@@ -152,9 +182,7 @@ def main() -> None:
     parser.add_argument("--target_fps", type=float, default=15.0)
     parser.add_argument("--camera_id", type=int, default=0)
     parser.add_argument("--countdown_seconds", type=int, default=3)
-
-    # Auto
-    parser.add_argument("--auto_period_seconds", type=float, default=2.0)
+    parser.add_argument("--auto_period_seconds", type=float, default=3.0)
     parser.add_argument("--subject", type=str, default="self")
     parser.add_argument("--lighting_note", type=str, default="")
     args = parser.parse_args()
@@ -164,10 +192,11 @@ def main() -> None:
     manifest_path = data_dir / args.manifest
     gestures_path = data_dir / args.gestures_yaml
     data_dir.mkdir(parents=True, exist_ok=True)
+    raw_dir.mkdir(parents=True, exist_ok=True)
     manifest_path.touch(exist_ok=True)
 
     gestures = ensure_gestures_yaml(gestures_path)
-    id_to_name = {int(k): v for k, v in gestures["id_to_name"].items()}
+    id_to_name = {int(k): str(v) for k, v in gestures["id_to_name"].items()}
     names = [id_to_name[i] for i in sorted(id_to_name.keys())]
     keymap = default_keymap(names)
 
@@ -189,12 +218,13 @@ def main() -> None:
     state = "READY"
     countdown_end = 0.0
     rec_start = 0.0
-    frame_buffer: deque[np.ndarray] = deque(maxlen=T)
+    recording_features: List[np.ndarray] = []
+    recording_times: List[float] = []
     saved_counter = Counter()
 
     auto_mode = False
     auto_next_start = 0.0
-    auto_first = True  # solo la primera vez se hace countdown
+    auto_first = True
 
     prev_time = time.time()
     fps = 0.0
@@ -212,85 +242,72 @@ def main() -> None:
 
             feat, frame = extractor.extract_feature(frame, draw=True)
 
-            # Auto trigger:
-            # - Primera vez: COUNTDOWN
-            # - Siguientes: RECORDING directo (sin countdown)
             if auto_mode and state == "READY" and now >= auto_next_start:
                 if auto_first:
                     state = "COUNTDOWN"
                     countdown_end = now + args.countdown_seconds
                     auto_first = False
                 else:
-                    state = "RECORDING"
-                    rec_start = now
-                    frame_buffer.clear()
+                    state, rec_start, recording_features, recording_times = start_recording(now)
 
             if state == "COUNTDOWN" and now >= countdown_end:
-                state = "RECORDING"
-                rec_start = now
-                frame_buffer.clear()
+                state, rec_start, recording_features, recording_times = start_recording(now)
 
             if state == "RECORDING":
-                frame_buffer.append(feat)
+                recording_features.append(feat.copy())
+                recording_times.append(float(now - rec_start))
                 elapsed = now - rec_start
-                if elapsed >= args.window_seconds:
-                    seq = np.array(frame_buffer, dtype=np.float32)
-                    if len(seq) < T:
-                        pad = np.zeros((T - len(seq), TOTAL_FEATURES), dtype=np.float32)
-                        seq = np.concatenate([seq, pad], axis=0)
-                    elif len(seq) > T:
-                        idx = np.linspace(0, len(seq) - 1, T).astype(np.int32)
-                        seq = seq[idx]
 
+                if elapsed >= args.window_seconds:
+                    seq = resample_sequence_nearest(
+                        features=recording_features,
+                        timestamps=recording_times,
+                        target_fps=args.target_fps,
+                        total_steps=T,
+                    )
                     y_name = names[selected_id]
                     meta = {
                         "timestamp": datetime.now().isoformat(),
                         "fps_cam": float(fps),
                         "window_seconds": float(args.window_seconds),
                         "target_fps": float(args.target_fps),
+                        "num_timesteps": int(T),
                         "subject": args.subject,
                         "lighting_note": args.lighting_note,
                         "auto_mode": bool(auto_mode),
                         "auto_period_seconds": float(args.auto_period_seconds),
                         "storage_subdir": f"{args.raw_subdir}/{safe_class_dirname(selected_id, y_name)}",
+                        "recorded_camera_frames": int(len(recording_features)),
+                        "recorded_duration_seconds": float(elapsed),
                     }
                     save_sample(seq, selected_id, y_name, raw_dir, manifest_path, data_dir, meta)
                     saved_counter[y_name] += 1
                     state = "READY"
+                    recording_features = []
+                    recording_times = []
 
-                    # Programa siguiente inicio en modo auto:
                     if auto_mode:
                         pause = max(0.0, args.auto_period_seconds - args.window_seconds)
                         auto_next_start = now + pause
 
-            # --- OVERLAY ---
             if auto_mode:
                 total = sum(saved_counter.values())
                 this_g = saved_counter[names[selected_id]]
-
-                # Todo pequeño excepto la cuenta atrás (y contadores grandes)
                 draw_text_top_center(frame, f"STATE: {state}", y=45, font_scale=1.0)
-
-                # Contadores GRANDES
                 draw_text_top_center(frame, f"TOTAL: {total}   |   THIS: {this_g}", y=90, font_scale=1.6)
 
-                # En descanso (READY en auto), mostrar cuánto falta (pequeño)
                 if state == "READY":
                     left_wait = max(0.0, auto_next_start - now)
                     draw_text_top_center(frame, f"NEXT REC IN: {left_wait:.1f}s", y=130, font_scale=0.9)
 
-                # Cuenta atrás GRANDE en el centro (no tocar)
                 if state == "COUNTDOWN":
                     left = max(0, int(round(countdown_end - now)))
                     left = max(1, left) if (countdown_end - now) > 0 else 0
                     draw_big_text_center(frame, str(left), font_scale=5.0)
 
-                # REC pequeño abajo derecha
                 if state == "RECORDING":
                     draw_rec_bottom_right(frame)
-
             else:
-                # Manual: overlay completo como antes
                 lines = [
                     f"Gesture: {names[selected_id]} (id={selected_id})",
                     f"State: {state}",
@@ -299,17 +316,18 @@ def main() -> None:
                     f"Saved total: {sum(saved_counter.values())}",
                     f"Saved this gesture: {saved_counter[names[selected_id]]}",
                     f"FPS: {fps:.1f}",
-                    f"Window T={T}, F={TOTAL_FEATURES}",
+                    f"Window: {args.window_seconds:.2f}s @ {args.target_fps:.1f} FPS -> T={T}, F={TOTAL_FEATURES}",
                 ]
                 if state == "COUNTDOWN":
                     left = max(0, int(round(countdown_end - now)))
                     lines.append(f"Starting in: {left}")
-                if state == "READY":
+                if state == "RECORDING":
+                    lines.append(f"Captured camera frames: {len(recording_features)}")
+                if state == "READY" and auto_mode:
                     lines.append(f"Next auto record in: {max(0.0, auto_next_start - now):.1f}s")
                 draw_overlay(frame, lines)
 
             cv2.imshow("LSE Capture", frame)
-
             key = cv2.waitKey(1) & 0xFF
             if key in (27, ord("x")):
                 break
@@ -334,7 +352,8 @@ def main() -> None:
                         print(f"{n}: {saved_counter[n]}")
             elif key == ord("r"):
                 state = "READY"
-                frame_buffer.clear()
+                recording_features = []
+                recording_times = []
                 print("Repetir habilitado: reinicia estado sin guardar.")
             else:
                 kchar = chr(key).lower() if 0 <= key < 256 else ""
