@@ -25,6 +25,7 @@ Este proyecto permite la captura, entrenamiento y despliegue de un sistema de re
 | `src/eval.py` | Evaluación detallada sobre el conjunto de test. |
 | `src/export_tflite.py` | Conversión a SavedModel y formato TFLite. |
 | `src/infer_live.py` | Inferencia en vivo desde webcam (Keras o TFLite). |
+| `src/rebuild_manifest.py` | Reconstruye `manifest.jsonl` escaneando `data/raw/` en disco. |
 
 ---
 
@@ -65,6 +66,12 @@ Entrena la red TCN con el dataset generado:
 ```bash
 python src/train_tcn.py --data_dir data --manifest manifest.jsonl --gestures_yaml gestures.yaml --epochs 40 --batch_size 32 --lr 1e-3 --model_size small --use_class_weights --augment
 ```
+
+> [!TIP]
+> Si el manifest tiene entradas incorrectas o quieres sincronizarlo con los ficheros reales en disco, ejecútalo antes de entrenar:
+> ```bash
+> python src/rebuild_manifest.py
+> ```
 
 > [!NOTE]
 > El dataset se divide automáticamente en **70% Entrenamiento**, **15% Validación** y **15% Test**, manteniendo la proporción de clases (estratificado).
