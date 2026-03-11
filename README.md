@@ -1,73 +1,111 @@
-# Proyecto LSE (gestos aislados) con TCN + MediaPipe Hands
+Proyecto LSE (gestos aislados) con TCN + MediaPipe Hands
 
-Proyecto en Python para capturar dataset propio, entrenar un modelo TCN en TensorFlow/Keras, evaluarlo, exportarlo a TFLite e inferir en vivo desde webcam usando solo manos.
+Proyecto en Python para:
 
-## Estructura
+capturar un dataset propio
 
-- `src/capture_dataset.py`: captura de muestras por ventana temporal fija y remuestreo a `target_fps`.
-- `src/dataset_utils.py`: lectura de manifest, validación de clases, split estratificado, `tf.data`, augment y class weights.
-- `src/models.py`: arquitectura TCN causal residual.
-- `src/metrics.py`: callback para macro-F1 en validación.
-- `src/train_tcn.py`: entrenamiento completo y guardado explícito de splits.
-- `src/eval.py`: evaluación sobre el split de test guardado.
-- `src/export_tflite.py`: export a SavedModel + TFLite con validación de clases y labels.
-- `src/infer_live.py`: inferencia en vivo Keras o TFLite con ventana deslizante.
-- `data/gestures.yaml`: mapeo editable `id_to_name` y `name_to_id`.
-- `data/manifest.jsonl`: registro de muestras guardadas (paths relativos a `data/`).
+entrenar un modelo TCN en TensorFlow/Keras
 
-## 1) Instalar dependencias
+evaluarlo
 
-```bash
+exportarlo a TFLite
+
+hacer inferencia en vivo desde webcam usando solo manos
+
+Estructura
+
+src/capture_dataset.py: captura de muestras por ventana temporal fija y remuestreo
+
+src/dataset_utils.py: lectura de manifest, validación de clases, split estratificado, tf.data
+
+src/models.py: arquitectura TCN causal residual
+
+src/metrics.py: callback para macro-F1 en validación
+
+src/train_tcn.py: entrenamiento completo y guardado explícito de splits
+
+src/eval.py: evaluación sobre el split de test guardado
+
+src/export_tflite.py: export a SavedModel + TFLite
+
+src/infer_live.py: inferencia en vivo con ventana deslizante
+
+Archivos de datos:
+
+data/gestures.yaml: mapeo editable id_to_name y name_to_id
+
+data/manifest.jsonl: registro de muestras guardadas
+
+1) Instalar dependencias
 python -m venv .venv
 .venv\Scripts\activate
+
 pip install -r requirements.txt
 2) Capturar dataset (webcam)
-python src/capture_dataset.py --data_dir data --window_seconds 1.5 --target_fps 15 --auto_period_seconds 3
+python src/capture_dataset.py \
+  --data_dir data \
+  --window_seconds 1.5 \
+  --target_fps 15 \
+  --auto_period_seconds 3
 Teclas de captura
 
-1..9, 0, a..z: seleccionan clases según el mapa mostrado en consola.
+1..9, 0, a..z → seleccionan clases según el mapa mostrado
 
-n: selecciona NONE.
+n → selecciona NONE
 
-SPACE: inicia cuenta atrás y graba una secuencia.
+SPACE → inicia cuenta atrás y graba una secuencia
 
-c o m: activa/desactiva modo automático.
+c o m → activar/desactivar modo automático
 
-r: repetir (reinicia estado sin guardar).
+r → repetir (reinicia estado sin guardar)
 
-s: imprime contadores de sesión por gesto.
+s → imprime contadores de sesión por gesto
 
-x o ESC: salir.
+x o ESC → salir
 
 Formato guardado por muestra (.npz)
+X: float32 shape (T, F)
 
-X: float32, shape (T, F).
+Donde:
 
-T = round(window_seconds * target_fps).
+T = round(window_seconds * target_fps)
 
-Con 1.5 s y 15 FPS, T = 22.
+Ejemplo:
 
-F = 130.
+1.5 s * 15 FPS = 22 frames
 
-Features por frame (F=130)
+Por tanto:
 
-LEFT: 21*(x,y,z)=63 normalizados.
+T = 22
+F = 130
+Features por frame (F = 130)
 
-RIGHT: 63 normalizados.
+LEFT hand landmarks → 63
 
-mask_left, mask_right (2).
+RIGHT hand landmarks → 63
 
-handedness_left, handedness_right (2).
+mask_left → 1
 
-Normalización por mano:
+mask_right → 1
 
-Restar wrist (lm0).
+handedness_left → 1
 
-Escalar por distancia wrist(0)->middle_mcp(9).
+handedness_right → 1
 
-Sin rotación adicional.
+Total:
 
-3) Entrenar
+63 + 63 + 2 + 2 = 130
+Normalización por mano
+
+Restar wrist (lm0)
+
+Escalar por distancia
+
+wrist (0) → middle_mcp (9)
+
+No se aplica rotación adicional.
+
+3) Entrenar el modelo
 python src/train_tcn.py \
   --data_dir data \
   --manifest manifest.jsonl \
@@ -80,35 +118,37 @@ python src/train_tcn.py \
   --augment \
   --model_size small
 
-Split por defecto: 70/15/15 estratificado.
+Split de dataset por defecto:
 
-Salida principal:
+70% train
+15% validation
+15% test
 
-outputs/checkpoints/best.keras
+Estratificado por clase.
 
-outputs/checkpoints/last.keras
+Salidas del entrenamiento
+outputs/
 
-outputs/training_log.csv
-
-outputs/config.json
-
-outputs/splits/train.jsonl
-
-outputs/splits/val.jsonl
-
-outputs/splits/test.jsonl
-
-outputs/labels.txt
-
-4) Evaluar
+ ├ checkpoints/
+ │   ├ best.keras
+ │   └ last.keras
+ │
+ ├ splits/
+ │   ├ train.jsonl
+ │   ├ val.jsonl
+ │   └ test.jsonl
+ │
+ ├ training_log.csv
+ ├ config.json
+ └ labels.txt
+4) Evaluar el modelo
 python src/eval.py \
   --data_dir data \
   --test_split outputs/splits/test.jsonl \
   --model_path outputs/checkpoints/best.keras \
   --gestures_yaml data/gestures.yaml \
   --save_cm_png
-
-Imprime:
+Métricas impresas
 
 accuracy
 
@@ -124,53 +164,48 @@ python src/export_tflite.py \
   --gestures_yaml data/gestures.yaml \
   --verify
 
-Con quantización dinámica opcional:
+Con cuantización dinámica:
 
 python src/export_tflite.py \
   --model_path outputs/checkpoints/best.keras \
   --gestures_yaml data/gestures.yaml \
   --quantize_dynamic \
   --verify
+Salidas
+outputs/
 
-Salidas:
-
-outputs/saved_model/
-
-outputs/tflite/model.tflite
-
-outputs/tflite/labels.txt
-
+ ├ saved_model/
+ └ tflite/
+      ├ model.tflite
+      └ labels.txt
 6) Inferencia en vivo
-Keras
+Usando Keras
 python src/infer_live.py \
   --model_path outputs/checkpoints/best.keras \
   --gestures_yaml data/gestures.yaml \
   --target_fps 15 \
   --stride_frames 1
-TFLite
+Usando TFLite
 python src/infer_live.py \
   --use_tflite \
   --tflite_path outputs/tflite/model.tflite \
   --gestures_yaml data/gestures.yaml \
   --target_fps 15 \
   --stride_frames 1
+Flags útiles
 
-Flags útiles:
+--threshold 0.5 → si confianza top-1 < threshold fuerza NONE
 
---threshold 0.5: si la confianza top-1 < threshold, fuerza NONE.
+--show_top3 → muestra top-3 predicciones
 
---show_top3: muestra top-3 en overlay.
+--smooth_n 1 → promedio móvil de predicciones
 
---smooth_n 1: promedio móvil de predicciones.
-
---stride_frames 1: frecuencia de predicción sobre la ventana deslizante.
+--stride_frames 1 → frecuencia de predicción
 
 Notas importantes
 
-El número de clases se toma de gestures.yaml, no de un entero hardcodeado.
+El número de clases se obtiene de gestures.yaml
 
-El entrenamiento guarda los splits usados; la evaluación debe reutilizarlos.
+El entrenamiento guarda los splits utilizados
 
-El manifest.jsonl puede contener rutas con \ o /; el loader las normaliza.
-
-Captura e inferencia usan la misma extracción de features, y la captura remuestrea la ventana temporal a target_fps antes de guardar
+La evaluación usa exactamente el mismo split de test
