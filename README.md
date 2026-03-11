@@ -1,111 +1,72 @@
-Proyecto LSE (gestos aislados) con TCN + MediaPipe Hands
+# 🤟 Proyecto LSE: Reconocimiento de Gestos con TCN + MediaPipe Hands
 
-Proyecto en Python para:
+Este proyecto permite la captura, entrenamiento y despliegue de un sistema de reconocimiento de Gestos Aislados de la **Lengua de Señas Española (LSE)**. Utiliza una arquitectura de **Redes Convolucionales Temporales (TCN)** alimentada por puntos de referencia (landmarks) de las manos extraídos mediante **MediaPipe**.
 
-capturar un dataset propio
+---
 
-entrenar un modelo TCN en TensorFlow/Keras
+## 🚀 Características Principales
 
-evaluarlo
+*   📸 **Captura Modular:** Herramienta para crear tu propio dataset con webcam.
+*   🧠 **Arquitectura TCN:** Modelo robusto para secuencias temporales con conexiones residuales.
+*   📊 **Validación Avanzada:** Métricas macro-F1 y división estratificada de datos.
+*   📱 **Despliegue Flexible:** Exportación a TensorFlow Lite (con cuantización opcional).
+*   ⏱️ **Inferencia en Tiempo Real:** Ventana deslizante para detección en vivo.
 
-exportarlo a TFLite
+---
 
-hacer inferencia en vivo desde webcam usando solo manos
+## 📂 Estructura del Proyecto
 
-Estructura
+| Archivo | Descripción |
+| :--- | :--- |
+| `src/capture_dataset.py` | Captura de muestras con ventana temporal fija y remuestreo. |
+| `src/dataset_utils.py` | Gestión de manifiestos, validación de clases y carga con `tf.data`. |
+| `src/models.py` | Definición de la arquitectura TCN causal residual. |
+| `src/train_tcn.py` | Script de entrenamiento completo y gestión de splits. |
+| `src/eval.py` | Evaluación detallada sobre el conjunto de test. |
+| `src/export_tflite.py` | Conversión a SavedModel y formato TFLite. |
+| `src/infer_live.py` | Inferencia en vivo desde webcam (Keras o TFLite). |
 
-src/capture_dataset.py: captura de muestras por ventana temporal fija y remuestreo
+---
 
-src/dataset_utils.py: lectura de manifest, validación de clases, split estratificado, tf.data
+## 🛠️ Guía de Uso
 
-src/models.py: arquitectura TCN causal residual
+### 1. Instalación de Dependencias
+Se recomienda el uso de un entorno virtual:
 
-src/metrics.py: callback para macro-F1 en validación
-
-src/train_tcn.py: entrenamiento completo y guardado explícito de splits
-
-src/eval.py: evaluación sobre el split de test guardado
-
-src/export_tflite.py: export a SavedModel + TFLite
-
-src/infer_live.py: inferencia en vivo con ventana deslizante
-
-Archivos de datos:
-
-data/gestures.yaml: mapeo editable id_to_name y name_to_id
-
-data/manifest.jsonl: registro de muestras guardadas
-
-1) Instalar dependencias
+```bash
 python -m venv .venv
+# En Windows:
 .venv\Scripts\activate
+# En Linux/macOS:
+source .venv/bin/activate
 
 pip install -r requirements.txt
-2) Capturar dataset (webcam)
+```
+
+### 2. Captura del Dataset
+Ejecuta la captura interactiva para grabar tus propios gestos:
+
+```bash
 python src/capture_dataset.py \
   --data_dir data \
   --window_seconds 1.5 \
   --target_fps 15 \
   --auto_period_seconds 3
-Teclas de captura
+```
 
-1..9, 0, a..z → seleccionan clases según el mapa mostrado
+**Controladores durante la captura:**
+*   `1..9, 0, a..z`: Selecciona la clase de gesto activa.
+*   `n`: Selecciona la clase `NONE` (fondo/sin gesto).
+*   `ESPACIO`: Inicia la cuenta atrás y graba una secuencia.
+*   `c` o `m`: Cambia entre modo automático y manual.
+*   `r`: Reinicia el estado actual (repetir muestra).
+*   `s`: Imprime estadísticas de la sesión.
+*   `ESC` o `x`: Salir.
 
-n → selecciona NONE
+### 3. Entrenamiento del Modelo
+Entrena la red TCN con el dataset generado:
 
-SPACE → inicia cuenta atrás y graba una secuencia
-
-c o m → activar/desactivar modo automático
-
-r → repetir (reinicia estado sin guardar)
-
-s → imprime contadores de sesión por gesto
-
-x o ESC → salir
-
-Formato guardado por muestra (.npz)
-X: float32 shape (T, F)
-
-Donde:
-
-T = round(window_seconds * target_fps)
-
-Ejemplo:
-
-1.5 s * 15 FPS = 22 frames
-
-Por tanto:
-
-T = 22
-F = 130
-Features por frame (F = 130)
-
-LEFT hand landmarks → 63
-
-RIGHT hand landmarks → 63
-
-mask_left → 1
-
-mask_right → 1
-
-handedness_left → 1
-
-handedness_right → 1
-
-Total:
-
-63 + 63 + 2 + 2 = 130
-Normalización por mano
-
-Restar wrist (lm0)
-
-Escalar por distancia
-
-wrist (0) → middle_mcp (9)
-
-No se aplica rotación adicional.
-
-3) Entrenar el modelo
+```bash
 python src/train_tcn.py \
   --data_dir data \
   --manifest manifest.jsonl \
@@ -113,99 +74,82 @@ python src/train_tcn.py \
   --epochs 40 \
   --batch_size 32 \
   --lr 1e-3 \
-  --seed 42 \
-  --use_class_weights \
-  --augment \
-  --model_size small
+  --model_size small \
+  --use_class_weights --augment
+```
 
-Split de dataset por defecto:
+> [!NOTE]
+> El dataset se divide automáticamente en **70% Entrenamiento**, **15% Validación** y **15% Test**, manteniendo la proporción de clases (estratificado).
 
-70% train
-15% validation
-15% test
+### 4. Evaluación
+Verifica el rendimiento del modelo en datos no vistos:
 
-Estratificado por clase.
-
-Salidas del entrenamiento
-outputs/
-
- ├ checkpoints/
- │   ├ best.keras
- │   └ last.keras
- │
- ├ splits/
- │   ├ train.jsonl
- │   ├ val.jsonl
- │   └ test.jsonl
- │
- ├ training_log.csv
- ├ config.json
- └ labels.txt
-4) Evaluar el modelo
+```bash
 python src/eval.py \
   --data_dir data \
   --test_split outputs/splits/test.jsonl \
   --model_path outputs/checkpoints/best.keras \
   --gestures_yaml data/gestures.yaml \
   --save_cm_png
-Métricas impresas
+```
 
-accuracy
+### 5. Exportación a TFLite
+Convierte el modelo para su uso en dispositivos móviles o embebidos:
 
-macro-F1
+```bash
+# Estándar
+python src/export_tflite.py --model_path outputs/checkpoints/best.keras
 
-F1 para clase NONE
+# Con cuantización dinámica (más ligero)
+python src/export_tflite.py --model_path outputs/checkpoints/best.keras --quantize_dynamic
+```
 
-matriz de confusión
+### 6. Inferencia en Tiempo Real
+Prueba el modelo directamente con tu webcam:
 
-5) Exportar a TFLite
-python src/export_tflite.py \
-  --model_path outputs/checkpoints/best.keras \
-  --gestures_yaml data/gestures.yaml \
-  --verify
+```bash
+# Usando Keras (.keras)
+python src/infer_live.py --model_path outputs/checkpoints/best.keras
 
-Con cuantización dinámica:
+# Usando TFLite (.tflite)
+python src/infer_live.py --use_tflite --tflite_path outputs/tflite/model.tflite
+```
 
-python src/export_tflite.py \
-  --model_path outputs/checkpoints/best.keras \
-  --gestures_yaml data/gestures.yaml \
-  --quantize_dynamic \
-  --verify
-Salidas
+---
+
+## 🔍 Detalles Técnicos
+
+### Representación de Datos
+Cada muestra se guarda en formato `.npz` con una matriz `X` de forma `(T, F)`:
+*   **T (Tiempo):** Frames en la ventana (Ej: 1.5s @ 15 FPS = 22 frames).
+*   **F (Características):** 130 valores por frame.
+
+**Desglose de características (F=130):**
+*   Landmarks Mano Izquierda: 21 puntos × 3 (x, y, z) = **63**
+*   Landmarks Mano Derecha: 21 puntos × 3 (x, y, z) = **63**
+*   Máscaras de visibilidad: **2** (izq/der)
+*   Lateralidad (Handedness): **2** (izq/der)
+
+### Normalización
+Para mejorar la robustez, los puntos de referencia se normalizan por mano:
+1. Se traslada el origen a la muñeca (`wrist`).
+2. Se escala la distancia entre la muñeca y el nudillo del dedo corazón (`middle_mcp`).
+
+---
+
+## 📁 Estructura de Salida (`outputs/`)
+
+```text
 outputs/
+ ├─ checkpoints/     # Modelos guardados (.keras)
+ ├─ splits/          # Registro de train/val/test (.jsonl)
+ ├─ tflite/          # Modelos convertidos y etiquetas
+ ├─ training_log.csv # Curvas de entrenamiento
+ └─ config.json      # Hiperparámetros utilizados
+```
 
- ├ saved_model/
- └ tflite/
-      ├ model.tflite
-      └ labels.txt
-6) Inferencia en vivo
-Usando Keras
-python src/infer_live.py \
-  --model_path outputs/checkpoints/best.keras \
-  --gestures_yaml data/gestures.yaml \
-  --target_fps 15 \
-  --stride_frames 1
-Usando TFLite
-python src/infer_live.py \
-  --use_tflite \
-  --tflite_path outputs/tflite/model.tflite \
-  --gestures_yaml data/gestures.yaml \
-  --target_fps 15 \
-  --stride_frames 1
-Flags útiles
+---
 
---threshold 0.5 → si confianza top-1 < threshold fuerza NONE
-
---show_top3 → muestra top-3 predicciones
-
---smooth_n 1 → promedio móvil de predicciones
-
---stride_frames 1 → frecuencia de predicción
-
-Notas importantes
-
-El número de clases se obtiene de gestures.yaml
-
-El entrenamiento guarda los splits utilizados
-
-La evaluación usa exactamente el mismo split de test
+## 📝 Notas
+*   El número de clases se gestiona dinámicamente desde `data/gestures.yaml`.
+*   La evaluación utiliza exactamente el mismo split de test generado durante el entrenamiento para garantizar resultados honestos.
