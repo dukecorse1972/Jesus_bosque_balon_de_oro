@@ -1,0 +1,56 @@
+{
+  "data_dir": "data",
+  "manifest": "manifest.jsonl",
+  "gestures_yaml": "gestures.yaml",
+  "epochs": 40,
+  "batch_size": 32,
+  "lr": 0.001,
+  "seed": 42,
+  "use_class_weights": true,
+  "augment": true,
+  "model_size": "small",
+  "train_size": 0.7,
+  "val_size": 0.15,
+  "test_size": 0.15,
+  "outputs_dir": "outputs",
+  "num_classes": 6,
+  "gesture_names": [
+    "HOLA",
+    "ADIOS",
+    "BUENOS_DIAS",
+    "GRACIAS",
+    "POR_FAVOR",
+    "NONE"
+  ],
+  "input_shape": [
+    22,
+    130
+  ],
+  "split_sizes": {
+    "train": 227,
+    "val": 49,
+    "test": 49
+  },
+  "class_counts": {
+    "0": 50,
+    "1": 50,
+    "2": 50,
+    "3": 50,
+    "4": 50,
+    "5": 75
+  },
+  "class_weight": {
+    "0": 0.5404762029647827,
+    "1": 1.0809524059295654,
+    "2": 37.83333206176758,
+    "3": 1.0809524059295654,
+    "4": 1.0809524059295654,
+    "5": 0.7275640964508057
+  },
+  "best_checkpoint": "outputs\\checkpoints\\best.keras",
+  "last_checkpoint": "outputs\\checkpoints\\last.keras",
+  "splits_dir": "outputs\\splits",
+  "labels_path": "outputs\\labels.txt",
+  "test_accuracy": 0.8571428571428571,
+  "test_macro_f1": 0.8433052241875771
+}

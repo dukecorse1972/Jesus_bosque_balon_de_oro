@@ -47,11 +47,7 @@ pip install -r requirements.txt
 Ejecuta la captura interactiva para grabar tus propios gestos:
 
 ```bash
-python src/capture_dataset.py \
-  --data_dir data \
-  --window_seconds 1.5 \
-  --target_fps 15 \
-  --auto_period_seconds 3
+python src/capture_dataset.py --data_dir data --window_seconds 1.5 --target_fps 15 --auto_period_seconds 3
 ```
 
 **Controladores durante la captura:**
@@ -67,15 +63,7 @@ python src/capture_dataset.py \
 Entrena la red TCN con el dataset generado:
 
 ```bash
-python src/train_tcn.py \
-  --data_dir data \
-  --manifest manifest.jsonl \
-  --gestures_yaml gestures.yaml \
-  --epochs 40 \
-  --batch_size 32 \
-  --lr 1e-3 \
-  --model_size small \
-  --use_class_weights --augment
+python src/train_tcn.py --data_dir data --manifest manifest.jsonl --gestures_yaml gestures.yaml --epochs 40 --batch_size 32 --lr 1e-3 --model_size small --use_class_weights --augment
 ```
 
 > [!NOTE]
@@ -85,12 +73,7 @@ python src/train_tcn.py \
 Verifica el rendimiento del modelo en datos no vistos:
 
 ```bash
-python src/eval.py \
-  --data_dir data \
-  --test_split outputs/splits/test.jsonl \
-  --model_path outputs/checkpoints/best.keras \
-  --gestures_yaml data/gestures.yaml \
-  --save_cm_png
+python src/eval.py --data_dir data --test_split outputs/splits/test.jsonl --model_path outputs/checkpoints/best.keras --gestures_yaml data/gestures.yaml --save_cm_png
 ```
 
 ### 5. Exportación a TFLite
